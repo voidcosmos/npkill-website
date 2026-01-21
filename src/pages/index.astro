@@ -5,63 +5,15 @@ import Footer from "../components/Footer.astro";
 import Devs from "../components/Devs.astro";
 import LinkButton from "../components/LinkButton.astro";
 import Backers from "../components/Backers.astro";
-import Features from "../components/Features.astro";
 import CommunityWall from "../components/community/CommunityWall.astro";
+import ProfilesShowcase from "../components/ProfilesShowcase.astro";
 ---
 
 <Layout title="npkill — Clean up your disk space">
   <main>
     <Hero />
 
-    <Features />
-
-    <section class="profiles-showcase">
-      <div class="showcase-container">
-        <div class="showcase-content">
-          <span class="section-label">Beyond node_modules</span>
-          <h2>Clean up any project type</h2>
-          <p>
-            npkill 1.0 comes with 17 built-in profiles for different languages
-            and frameworks. From Python to Rust, Unity to Godot — one tool to
-            reclaim them all.
-          </p>
-
-          <div class="profile-tags">
-            <span class="tag">node</span>
-            <span class="tag">python</span>
-            <span class="tag">rust</span>
-            <span class="tag">go</span>
-            <span class="tag">java</span>
-            <span class="tag">unity</span>
-            <span class="tag">godot</span>
-            <span class="tag">flutter</span>
-            <span class="tag tag-more">+9 more</span>
-          </div>
-
-          <a href="/docs/profiles" class="learn-more">
-            Learn about profiles <i class="bx bx-right-arrow-alt"></i>
-          </a>
-        </div>
-
-        <div class="showcase-visual">
-          <div class="terminal-mini">
-            <div class="terminal-header">
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-            <div class="terminal-body">
-              <code>
-                <span class="prompt">$</span> npx npkill -p python<br />
-                <span class="comment"
-                  ># Finds __pycache__, .venv, .pytest_cache...</span
-                >
-              </code>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <ProfilesShowcase />
 
     <section class="how-it-works">
       <div class="content">
@@ -145,137 +97,6 @@ import CommunityWall from "../components/community/CommunityWall.astro";
     font-size: clamp(1.75rem, 4vw, 2.25rem);
     margin: 0 0 1rem;
     letter-spacing: -0.02em;
-  }
-
-  /* Profiles Showcase */
-  .profiles-showcase {
-    padding: 6rem 1.5rem;
-    background: var(--color-bg-dark);
-  }
-
-  .showcase-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .showcase-content {
-    text-align: left;
-  }
-
-  .showcase-content h2 {
-    text-align: left;
-  }
-
-  .showcase-content p {
-    font-size: 1.1rem;
-    color: var(--color-text-muted);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-  }
-
-  .profile-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .tag {
-    background: var(--color-bg-elevated);
-    border: 1px solid var(--color-border);
-    padding: 0.35rem 0.75rem;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    font-family: "JetBrains Mono", monospace;
-  }
-
-  .tag-more {
-    color: var(--color-primary);
-    border-color: rgba(241, 77, 77, 0.3);
-    background: rgba(241, 77, 77, 0.1);
-  }
-
-  .learn-more {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    font-size: 0.95rem;
-  }
-
-  .learn-more:hover i {
-    transform: translateX(4px);
-  }
-
-  .learn-more i {
-    transition: transform 0.2s;
-  }
-
-  .showcase-visual {
-    display: flex;
-    justify-content: center;
-  }
-
-  .terminal-mini {
-    background: var(--color-bg-darker);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    overflow: hidden;
-    width: 100%;
-    max-width: 400px;
-    box-shadow:
-      0 4px 24px rgba(0, 0, 0, 0.3),
-      0 0 0 1px rgba(241, 77, 77, 0.1);
-  }
-
-  .terminal-mini .terminal-header {
-    background: var(--color-bg-card);
-    padding: 0.75rem 1rem;
-    display: flex;
-    gap: 6px;
-  }
-
-  .terminal-mini .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--color-border-light);
-  }
-
-  .terminal-mini .dot:nth-child(1) {
-    background: #ff5f57;
-  }
-  .terminal-mini .dot:nth-child(2) {
-    background: #ffbd2e;
-  }
-  .terminal-mini .dot:nth-child(3) {
-    background: #28ca42;
-  }
-
-  .terminal-mini .terminal-body {
-    padding: 1.25rem;
-  }
-
-  .terminal-mini code {
-    background: none;
-    border: none;
-    padding: 0;
-    font-size: 0.9rem;
-    line-height: 1.8;
-    color: var(--color-text);
-  }
-
-  .prompt {
-    color: var(--color-primary);
-  }
-
-  .comment {
-    color: var(--color-text-subtle);
   }
 
   /* How it works */
@@ -383,23 +204,6 @@ import CommunityWall from "../components/community/CommunityWall.astro";
   }
 
   @media (max-width: 900px) {
-    .showcase-container {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .showcase-content {
-      text-align: center;
-    }
-
-    .showcase-content h2 {
-      text-align: center;
-    }
-
-    .profile-tags {
-      justify-content: center;
-    }
-
     .steps {
       grid-template-columns: 1fr;
       gap: 1.5rem;
@@ -407,7 +211,6 @@ import CommunityWall from "../components/community/CommunityWall.astro";
   }
 
   @media (max-width: 600px) {
-    .profiles-showcase,
     .how-it-works {
       padding: 4rem 1rem;
     }

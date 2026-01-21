@@ -1,0 +1,397 @@
+---
+interface Props {}
+
+const profiles = [
+  {
+    id: "node",
+    label: "node",
+    arg: "node",
+    description: "Finds node_modules, bower_components...",
+  },
+  {
+    id: "python",
+    label: "python",
+    arg: "python",
+    description: "Finds __pycache__, .venv, .pytest_cache...",
+  },
+  {
+    id: "rust",
+    label: "rust",
+    arg: "rust",
+    description: "Finds target directories...",
+  },
+  {
+    id: "go",
+    label: "go",
+    arg: "go",
+    description: "Finds bin, pkg directories...",
+  },
+  {
+    id: "java",
+    label: "java",
+    arg: "java",
+    description: "Finds build, target, .gradle...",
+  },
+  {
+    id: "unity",
+    label: "unity",
+    arg: "unity",
+    description: "Finds Library, Temp, Obj...",
+  },
+  {
+    id: "godot",
+    label: "godot",
+    arg: "godot",
+    description: "Finds .import directory...",
+  },
+  {
+    id: "flutter",
+    label: "flutter",
+    arg: "flutter",
+    description: "Finds build, .dart_tool...",
+  },
+];
+---
+
+<section class="profiles-showcase">
+  <div class="showcase-container">
+    <div class="showcase-content">
+      <span class="section-label">Beyond node_modules</span>
+      <h2>Clean up any project type</h2>
+      <p>
+        npkill comes with a lot of built-in profiles for different languages and
+        frameworks.
+      </p>
+
+      <div class="profile-tags">
+        {
+          profiles.map((profile) => (
+            <button
+              class="tag"
+              data-profile={profile.id}
+              data-arg={profile.arg}
+              data-desc={profile.description}
+              aria-label={`Select ${profile.label} profile`}
+            >
+              {profile.label}
+            </button>
+          ))
+        }
+        <span class="tag-more">and more</span>
+      </div>
+      <p class="selection-hint">Ctrl + click to select multiple</p>
+
+      <a href="/docs/profiles" class="learn-more">
+        Learn about profiles <i class="bx bx-right-arrow-alt"></i>
+      </a>
+    </div>
+
+    <div class="showcase-visual">
+      <div class="terminal-mini">
+        <div class="terminal-header">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div class="terminal-body">
+          <code id="terminal-code">
+            <span class="prompt">$</span>
+            <span id="command-text">npx npkill</span><br />
+            <span class="comment" id="comment-text"
+              ># Select a profile to see what it finds</span
+            >
+          </code>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const tags = document.querySelectorAll(".tag[data-profile]");
+  const commandText = document.getElementById("command-text");
+  const commentText = document.getElementById("comment-text");
+
+  let selectedProfiles = new Set();
+
+  function updateTerminal() {
+    const idsToShow = Array.from(selectedProfiles);
+
+    // Visual update of tags
+    tags.forEach((tag) => {
+      const id = tag.getAttribute("data-profile");
+      if (selectedProfiles.has(id)) {
+        tag.classList.add("selected");
+      } else {
+        tag.classList.remove("selected");
+      }
+    });
+
+    if (idsToShow.length === 0) {
+      // Default state
+      if (commandText) commandText.textContent = "npx npkill";
+      if (commentText) commentText.textContent = "# Select a profile";
+      return;
+    }
+
+    // Re-calculating description
+    const desc =
+      idsToShow.length === 1
+        ? document.querySelector(`.tag[data-profile="${idsToShow[0]}"]`)
+            ?.dataset.desc
+        : `Finds junk for ${idsToShow.join(", ")}...`;
+
+    if (commandText)
+      commandText.textContent = `npx npkill -p ${idsToShow.join(",")}`;
+    if (commentText) commentText.textContent = `# ${desc}`;
+  }
+
+  tags.forEach((tag) => {
+    tag.addEventListener("click", (e) => {
+      const id = tag.getAttribute("data-profile");
+      if (!id) return;
+
+      if (e.ctrlKey || e.metaKey) {
+        // Toggle if ctrl pressed
+        if (selectedProfiles.has(id)) {
+          selectedProfiles.delete(id);
+        } else {
+          selectedProfiles.add(id);
+        }
+      } else {
+        // Exclusive select
+        selectedProfiles.clear();
+        selectedProfiles.add(id);
+      }
+      updateTerminal();
+    });
+  });
+
+  // Initial state
+  const pythonTag = document.querySelector('.tag[data-profile="python"]');
+  if (pythonTag) {
+    selectedProfiles.add("node");
+    updateTerminal();
+  }
+</script>
+
+<style>
+  .section-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  /* Profiles Showcase */
+  .profiles-showcase {
+    padding: 6rem 1.5rem;
+    background: var(--color-bg-dark);
+  }
+
+  .showcase-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center; /* Generally keep them centered, but we handle growth carefully */
+  }
+
+  .showcase-content {
+    text-align: left;
+  }
+
+  .showcase-content h2 {
+    text-align: left;
+  }
+
+  .showcase-content p {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .selection-hint {
+    font-size: 0.85rem !important;
+    color: var(--color-text-subtle) !important;
+    margin-top: -0.5rem !important; /* Pull closer to tags */
+    margin-bottom: 2rem !important;
+  }
+
+  .selection-hint kbd {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.1rem 0.3rem;
+    font-size: 0.8em;
+    font-family: inherit;
+  }
+
+  .profile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .tag {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-family: "JetBrains Mono", monospace;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+
+  .tag:hover {
+    border-color: var(--color-primary);
+    color: var(--color-text);
+  }
+
+  .tag.selected {
+    background: rgba(241, 77, 77, 0.1);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .tag-more {
+    font-size: 0.85rem;
+    color: var(--color-text-subtle);
+    padding: 0.35rem 0.75rem;
+    font-family: "JetBrains Mono", monospace;
+    display: inline-flex;
+    align-items: center;
+    cursor: default;
+  }
+
+  .learn-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .learn-more:hover i {
+    transform: translateX(4px);
+  }
+
+  .learn-more i {
+    transition: transform 0.2s;
+  }
+
+  .showcase-visual {
+    display: flex;
+    justify-content: center;
+    align-self: start; /* Fix Top anchor so it grows downwards */
+    padding-top: 2rem; /* Align visually with the text */
+  }
+
+  .terminal-mini {
+    background: var(--color-bg-darker);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(241, 77, 77, 0.1);
+  }
+
+  .terminal-mini .terminal-header {
+    background: var(--color-bg-card);
+    padding: 0.75rem 1rem;
+    display: flex;
+    gap: 6px;
+  }
+
+  .terminal-mini .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-border-light);
+  }
+
+  .terminal-mini .dot:nth-child(1) {
+    background: #ff5f57;
+  }
+  .terminal-mini .dot:nth-child(2) {
+    background: #ffbd2e;
+  }
+  .terminal-mini .dot:nth-child(3) {
+    background: #28ca42;
+  }
+
+  .terminal-mini .terminal-body {
+    padding: 1.25rem;
+  }
+
+  .terminal-mini code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    white-space: pre-wrap; /* Allow wrapping */
+    word-break: break-all; /* Ensure long words break */
+  }
+
+  .prompt {
+    color: var(--color-primary);
+  }
+
+  .comment {
+    color: var(--color-text-subtle);
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    .showcase-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .showcase-content {
+      text-align: center;
+    }
+
+    .showcase-content h2 {
+      text-align: center;
+    }
+
+    .profile-tags {
+      justify-content: center;
+    }
+
+    .showcase-visual {
+      align-self: center;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .profiles-showcase {
+      padding: 4rem 1rem;
+    }
+  }
+</style>
