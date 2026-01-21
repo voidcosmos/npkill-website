@@ -1,371 +1,233 @@
-<div class="root">
-  <div class="section speed-section" id="speedSection">
-    <canvas id="backgroundSpeed"></canvas>
-    <div class="content">
-      <div class="speed-content">
-        <div style="flex:2;">
-          <h2>Super Fast 🚀</h2>
-          <p>
-            Npkill looks for node_modules or any other directory at low level
-            and in a distributed way, so it will make almost full use of disk
-            and CPU capacities.
-          </p>
-        </div>
+---
+const features = [
+  {
+    icon: "bx-layer",
+    title: "17 Built-in Profiles",
+    description:
+      "Clean up Node, Python, Rust, Go, Unity, Godot, and more. One command, multiple ecosystems.",
+  },
+  {
+    icon: "bx-zap",
+    title: "Blazing Fast",
+    description:
+      "Low-level search that maximizes disk and CPU usage. Find gigabytes in seconds.",
+  },
+  {
+    icon: "bx-select-multiple",
+    title: "Multiselect",
+    description:
+      "Select multiple directories and delete them all at once. No more one-by-one.",
+  },
+  {
+    icon: "bx-search-alt",
+    title: "Smart Filter",
+    description:
+      "Press / to filter results by path. Supports regex for power users.",
+  },
+  {
+    icon: "bx-cog",
+    title: "Configurable",
+    description:
+      "Create custom profiles and set defaults with .npkillrc. Your workflow, your rules.",
+  },
+  {
+    icon: "bx-shield-quarter",
+    title: "Safe by Default",
+    description:
+      "Risk analyzer warns you about system-critical directories. Delete with confidence.",
+  },
+];
+---
 
-        <div class="bars-container">
-          <div class="bars">
-            <div class="white-bar">
-              <div class="green-bar"></div>
-            </div>
-          </div>
+<section class="features-section">
+  <div class="features-container">
+    <div class="features-header">
+      <span class="section-label">Features</span>
+      <h2>Everything you need to reclaim disk space</h2>
+      <p>
+        npkill 1.0 brings powerful new features while staying simple to use.
+      </p>
+    </div>
 
-          <div class="bars group2">
-            <div class="white-bar">
-              <div class="green-bar"></div>
+    <div class="features-grid">
+      {
+        features.map((feature) => (
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class={`bx ${feature.icon}`} />
             </div>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
           </div>
-        </div>
-      </div>
+        ))
+      }
+    </div>
+
+    <div class="features-cta">
+      <a href="/docs" class="btn btn-primary">View Documentation</a>
+      <a href="/changelog" class="btn btn-ghost">What's new in 1.0</a>
     </div>
   </div>
-
-  <div class="section easy-section">
-    <div class="content">
-      <div class="easy-content">
-        <div style="flex: 2;">
-          <h2>Super easy 😎</h2>
-          <p>A, B and C. No weird stories. Intuitive to use.</p>
-        </div>
-
-        <div class="abc-anim-container" style="flex:1"></div>
-      </div>
-    </div>
-  </div>
-</div>
+</section>
 
 <style>
-  h2 {
-    font-size: 2.6em;
-    margin: 0;
-  }
-
-  .root {
-    transform: rotate(-2deg);
-    margin-left: -15px;
-    margin-right: -15px;
-  }
-
-  .section {
+  .features-section {
+    padding: 6rem 1.5rem;
+    background: var(--color-bg-darker);
     position: relative;
   }
 
-  .section p {
-  }
-
-  .speed-section {
-    background-color: #040c24;
-    color: white;
-    flex: 1 !important;
-  }
-
-  .easy-section {
-    background-color: #f13b62;
-    color: white;
-  }
-
-  .easy-content {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-    text-align: right;
-    gap: 14px;
-  }
-
-  .easy-content p {
-    margin-left: auto;
-  }
-  .easy-section h2 {
-    text-align: right;
-  }
-
-  .speed-content {
-    display: flex;
-    align-items: center;
-    margin: 8em 0;
-    gap: 64px;
-  }
-
-  .bars-container {
-    flex: 1;
-    transform: rotate(-3deg);
-    width: 100%;
-  }
-
-  .bars {
-    height: 20px;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-    background-color: gray;
-    animation: barContainerAnim 1.4s ease-in-out infinite;
-  }
-
-  .white-bar {
-    height: 100%;
-    width: 40%;
-    background-color: white;
-    animation: whiteBarAnim 2s linear infinite;
-  }
-
-  .green-bar {
-    height: 100%;
-    width: 40%;
-    background-color: green;
-    animation: greenBarAnim 2s linear infinite;
-    animation-delay: 0.3s;
-  }
-
-  .group2 {
-    margin-top: 1em;
-  }
-  .group2,
-  .group2 * {
-    animation-delay: -0.9s;
-  }
-
-  .abc-anim-container {
-    background-image: url(/img/abc.svg);
-    background-size: 487px;
-    height: 155px;
-    background-position-x: 0px;
-    background-repeat: repeat-x;
-    animation: abcAnim 44s linear infinite;
-    opacity: 0.5;
-  }
-
-  #backgroundSpeed {
+  .features-section::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.1;
-    pointer-events: none;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-border),
+      transparent
+    );
   }
 
-  @keyframes abcAnim {
-    from {
-      background-position-x: 0;
-    }
-    to {
-      background-position-x: -1000px;
+  .features-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .features-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .features-header h2 {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .features-header p {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: all 0.2s ease;
+  }
+
+  .feature-card:hover {
+    border-color: var(--color-border-light);
+    transform: translateY(-2px);
+  }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(241, 77, 77, 0.1);
+    border-radius: 10px;
+    margin-bottom: 1.25rem;
+  }
+
+  .feature-icon i {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+  }
+
+  .feature-card h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+  }
+
+  .feature-card p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .features-cta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: var(--color-primary-dark);
+    color: white;
+  }
+
+  .btn-ghost {
+    color: var(--color-text-muted);
+  }
+
+  .btn-ghost:hover {
+    color: var(--color-text);
+  }
+
+  @media (max-width: 900px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  @keyframes barContainerAnim {
-    0% {
-      transform: translate(0, 0);
+  @media (max-width: 600px) {
+    .features-section {
+      padding: 4rem 1rem;
     }
-    20% {
-      transform: translate(-1px, 1px);
-    }
-    40% {
-      transform: translate(1px, -1px);
-    }
-    60% {
-      transform: translate(-1px, 0px);
-    }
-    80% {
-      transform: translate(1px, 1px);
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
 
-  @keyframes whiteBarAnim {
-    0% {
-      width: 80%;
+    .features-grid {
+      grid-template-columns: 1fr;
     }
-    10% {
-      width: 70%;
-    }
-    20% {
-      width: 79%;
-    }
-    30% {
-      width: 74%;
-    }
-    40% {
-      width: 78%;
-    }
-    50% {
-      width: 75%;
-    }
-    60% {
-      width: 69%;
-    }
-    70% {
-      width: 72%;
-    }
-    80% {
-      width: 74%;
-    }
-    90% {
-      width: 80%;
-    }
-    100% {
-      width: 80%;
-    }
-  }
 
-  @keyframes greenBarAnim {
-    0% {
-      width: 80%;
-    }
-    10% {
-      width: 79%;
-    }
-    20% {
-      width: 64%;
-    }
-    30% {
-      width: 70%;
-    }
-    40% {
-      width: 96%;
-    }
-    50% {
-      width: 94%;
-    }
-    60% {
-      width: 89%;
-    }
-    70% {
-      width: 84%;
-    }
-    80% {
-      width: 79%;
-    }
-    90% {
-      width: 75%;
-    }
-    100% {
-      width: 80%;
-    }
-  }
-
-  @media only screen and (max-width: 625px) {
-    h2,
-    .easy-section h2 {
-      font-size: 1.4em;
-      text-align: center;
-    }
-  }
-
-  @media only screen and (max-width: 600px) {
-    .root {
-      transform: none;
-      margin: 0;
-    }
-    .speed-content {
+    .features-cta {
       flex-direction: column;
-      gap: 14px;
-    }
-
-    .easy-content {
-      flex-direction: column;
-    }
-
-    .bars-container {
-      transform: none;
-    }
-    .abc-anim-container {
-      flex: none !important;
-      width: 100%;
+      align-items: center;
     }
   }
 </style>
-
-<script>
-  const speedSection = document.getElementById("speedSection")!;
-  const canvas: HTMLCanvasElement = document.getElementById(
-    "backgroundSpeed",
-  )! as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d")!;
-
-  if (!speedSection) {
-    throw new Error("#speedSection not found");
-  }
-
-  if (!canvas) {
-    throw new Error("#backgroundSpeed canvas not found");
-  }
-
-  if (!ctx) {
-    throw new Error("Error getting ctx of canvas.");
-  }
-
-  // Set canvas dimensions
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  // Particle class
-  class Particle {
-    private x = 0;
-    private y = 0;
-    private speed = 0;
-    private radius = 0;
-    private color = "white";
-
-    constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.speed = Math.random() * 4 + 1;
-      this.radius = Math.random() * 1 + 1;
-      this.color = "white";
-    }
-
-    update() {
-      this.x -= this.speed;
-      this.y += this.speed * 0.05;
-      if (this.x < 0) {
-        this.x = canvas.width;
-        this.y = Math.random() * canvas.height;
-      }
-    }
-
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-    }
-  }
-
-  const MAX_PARTICLES = 500;
-  const particles: Particle[] = [];
-  const particlesNumber = Math.min(
-    MAX_PARTICLES,
-    speedSection.clientWidth * speedSection.clientHeight * 0.0004,
-  );
-  console.log({ particlesNumber });
-  for (let i = 0; i < particlesNumber; i++) {
-    particles.push(new Particle());
-  }
-
-  function animate() {
-    ctx.canvas.width = (speedSection.clientWidth, 3000);
-    // Limit height for prevent infinite scroll when css fail to load
-    ctx.canvas.height = Math.min(speedSection.clientHeight, 3000);
-    particles.forEach((particle) => {
-      particle.update();
-      particle.draw();
-    });
-    requestAnimationFrame(animate);
-  }
-
-  // Start animation
-  animate();
-</script>

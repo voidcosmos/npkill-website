@@ -1,0 +1,200 @@
+---
+import DocLayout from "../../components/docs/DocLayout.astro";
+import CodeBlock from "../../components/docs/CodeBlock.astro";
+---
+
+<DocLayout
+  title="Getting Started"
+  description="Learn how to install and use npkill to clean up disk space by removing node_modules and other heavy directories."
+>
+  <h1>Getting Started</h1>
+  <p class="lead">
+    npkill is a CLI tool that helps you find and delete <code>node_modules</code
+    >, build artifacts, cache directories, and more — reclaiming gigabytes of
+    disk space.
+  </p>
+
+  <h2>Installation</h2>
+  <p>
+    The easiest way to use npkill is with <code>npx</code> — no installation required:
+  </p>
+
+  <CodeBlock code="npx npkill" />
+
+  <p>Or install it globally:</p>
+
+  <CodeBlock code="npm install -g npkill" />
+
+  <h2>Quick Start</h2>
+  <p>Run npkill in any directory to start scanning:</p>
+
+  <ol>
+    <li>Open your terminal</li>
+    <li>
+      Navigate to your projects directory (or run from home with <code>-f</code
+      >)
+    </li>
+    <li>Run <code>npx npkill</code></li>
+    <li>Use <kbd>↑</kbd>/<kbd>↓</kbd> to navigate, <kbd>Del</kbd> to delete</li>
+  </ol>
+
+  <h2>Basic Controls</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><kbd>↑</kbd> / <kbd>k</kbd></td>
+        <td>Move up</td>
+      </tr>
+      <tr>
+        <td><kbd>↓</kbd> / <kbd>j</kbd></td>
+        <td>Move down</td>
+      </tr>
+      <tr>
+        <td><kbd>Del</kbd> / <kbd>Backspace</kbd></td>
+        <td>Delete selected directory</td>
+      </tr>
+      <tr>
+        <td><kbd>PgUp</kbd> / <kbd>Ctrl+u</kbd></td>
+        <td>Page up</td>
+      </tr>
+      <tr>
+        <td><kbd>PgDown</kbd> / <kbd>Ctrl+d</kbd></td>
+        <td>Page down</td>
+      </tr>
+      <tr>
+        <td><kbd>Home</kbd> / <kbd>End</kbd></td>
+        <td>Jump to first/last result</td>
+      </tr>
+      <tr>
+        <td><kbd>o</kbd></td>
+        <td>Open in file explorer</td>
+      </tr>
+      <tr>
+        <td><kbd>q</kbd> / <kbd>Ctrl+c</kbd></td>
+        <td>Quit</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>New in 1.0</h2>
+  <p>Version 1.0 brings major new features:</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <i class="bx bx-layer"></i>
+      <h3>Profiles</h3>
+      <p>
+        Go beyond node_modules. Clean up Python, Rust, Godot, and more with
+        built-in profiles.
+      </p>
+      <a href="/docs/profiles">Learn more →</a>
+    </div>
+
+    <div class="feature-card">
+      <i class="bx bx-columns"></i>
+      <h3>Panels</h3>
+      <p>New info panel, options panel, and help panel for better workflow.</p>
+      <a href="/changelog#panels">Learn more →</a>
+    </div>
+
+    <div class="feature-card">
+      <i class="bx bx-select-multiple"></i>
+      <h3>Multiselect</h3>
+      <p>Select multiple directories and delete them all at once.</p>
+      <a href="/changelog#multiselect">Learn more →</a>
+    </div>
+
+    <div class="feature-card">
+      <i class="bx bx-search-alt"></i>
+      <h3>Filter Results</h3>
+      <p>Press <kbd>/</kbd> to filter results by path. Supports regex.</p>
+      <a href="/changelog#filter">Learn more →</a>
+    </div>
+
+    <div class="feature-card">
+      <i class="bx bx-cog"></i>
+      <h3>.npkillrc</h3>
+      <p>Configure default behavior, create custom profiles.</p>
+      <a href="/docs/npkillrc">Learn more →</a>
+    </div>
+
+    <div class="feature-card">
+      <i class="bx bx-code-curly"></i>
+      <h3>JSON Mode</h3>
+      <p>Output results as JSON for scripting and automation.</p>
+      <a href="/docs/commands#json">Learn more →</a>
+    </div>
+  </div>
+
+  <h2>Safety First</h2>
+  <p>
+    Some applications (like Spotify or Discord) need their <code
+      >node_modules</code
+    > to work. npkill detects these and displays a ⚠️ warning. The new risk analyzer
+    in 1.0 provides even better detection and explains why a directory is marked
+    as sensitive.
+  </p>
+
+  <h2>Next Steps</h2>
+  <ul>
+    <li><a href="/docs/commands">View all commands and options</a></li>
+    <li><a href="/docs/profiles">Learn about profiles</a></li>
+    <li><a href="/docs/npkillrc">Configure npkill with .npkillrc</a></li>
+    <li><a href="/changelog">See what's new in version 1.0</a></li>
+  </ul>
+</DocLayout>
+
+<style>
+  .lead {
+    font-size: 1.15rem;
+    color: var(--color-text) !important;
+    margin-bottom: 2rem;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .feature-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    transition: border-color 0.2s;
+  }
+
+  .feature-card:hover {
+    border-color: var(--color-border-light);
+  }
+
+  .feature-card i {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .feature-card p {
+    font-size: 0.9rem;
+    margin: 0 0 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .feature-card a {
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+</style>

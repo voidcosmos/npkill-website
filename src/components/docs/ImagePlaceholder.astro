@@ -1,0 +1,89 @@
+---
+interface Props {
+  alt: string;
+  description?: string;
+  aspectRatio?: string;
+  src?: string;
+}
+
+const { alt, description, aspectRatio = "16/9", src } = Astro.props;
+---
+
+{
+  src ? (
+    <figure class="image-figure">
+      <img src={src} alt={alt} loading="lazy" />
+      {description && <figcaption>{description}</figcaption>}
+    </figure>
+  ) : (
+    <figure class="image-placeholder" style={`aspect-ratio: ${aspectRatio};`}>
+      <div class="placeholder-content">
+        <i class="bx bx-image-alt" />
+        <span class="placeholder-alt">{alt}</span>
+        {description && <span class="placeholder-desc">{description}</span>}
+      </div>
+      {description && <figcaption>{description}</figcaption>}
+    </figure>
+  )
+}
+
+<style>
+  .image-figure {
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .image-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .image-placeholder {
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    border: 2px dashed var(--color-border);
+    background: var(--color-bg-card);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .placeholder-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .placeholder-content i {
+    font-size: 2.5rem;
+    color: var(--color-text-subtle);
+  }
+
+  .placeholder-alt {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .placeholder-desc {
+    font-size: 0.8rem;
+    color: var(--color-text-subtle);
+    max-width: 300px;
+  }
+
+  figcaption {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    background: var(--color-bg-darker);
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+</style>

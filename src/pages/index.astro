@@ -3,144 +3,413 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Footer from "../components/Footer.astro";
 import Devs from "../components/Devs.astro";
-import Notice from "../components/Notice.astro";
 import LinkButton from "../components/LinkButton.astro";
-import NpkillOptions from "../components/NpkillOptions.astro";
 import Backers from "../components/Backers.astro";
 import Features from "../components/Features.astro";
 import CommunityWall from "../components/community/CommunityWall.astro";
 ---
 
-<Layout title="NPKILL - Maintain your development workspace clean.">
+<Layout title="npkill — Clean up your disk space">
   <main>
     <Hero />
 
-    <div>
-      <section class="content">
-        <h2>What is npkill?</h2>
-        <p>
-          <b>Npkill</b> is a CLI tool that allows you to list all the heavy <b
-            >node_modules</b
-          > that you have scattered around your computer and allows you to delete
-          those you don't need in a very simple and elegant way.
-        </p>
-        <p>
-          You might be surprised how much space <b>node_modules</b> from old projects
-          are silly taking up.
-        </p>
-      </section>
+    <Features />
 
-      <section>
-        <Features />
-      </section>
+    <section class="profiles-showcase">
+      <div class="showcase-container">
+        <div class="showcase-content">
+          <span class="section-label">Beyond node_modules</span>
+          <h2>Clean up any project type</h2>
+          <p>
+            npkill 1.0 comes with 17 built-in profiles for different languages
+            and frameworks. From Python to Rust, Unity to Godot — one tool to
+            reclaim them all.
+          </p>
 
-      <section class="content">
-        <h2>How to use</h2>
-        <p>
-          <ul>
-            <li>
-              <b>Step 1</b>: Run <code>npx npkill</code> on your terminal.
-            </li>
-            <li>
-              <b>Step 2</b>: Npkill will start scanning the working directory
-              from where you have executed the command (see below for options to
-              change this). The results will start to be displayed.
-            </li>
-            <li>
-              <b>Step 3</b>: Navigate through the results with <b
-                ><kbd>▲</kbd></b
-              > or <b><kbd>▼</kbd></b> and press <b><kbd>Del</kbd></b> to delete.
-            </li>
-          </ul>
-        </p>
+          <div class="profile-tags">
+            <span class="tag">node</span>
+            <span class="tag">python</span>
+            <span class="tag">rust</span>
+            <span class="tag">go</span>
+            <span class="tag">java</span>
+            <span class="tag">unity</span>
+            <span class="tag">godot</span>
+            <span class="tag">flutter</span>
+            <span class="tag tag-more">+9 more</span>
+          </div>
 
-        <div style="margin: 40px 0">
-          <Notice type="warning">
-            Some applications installed on the system (like spotify or discord)
-            need their node_modules directory to work and deleting them may
-            break them. Npkill will highlight them by displaying a ⚠️ to be
-            careful.
-          </Notice>
+          <a href="/docs/profiles" class="learn-more">
+            Learn about profiles <i class="bx bx-right-arrow-alt"></i>
+          </a>
         </div>
 
-        <h3>All controls</h3>
-        <ul>
-          <li>
-            For move <b>up</b>: <b><kbd>▲</kbd></b> or <b><kbd>k</kbd></b>.
-          </li>
-          <li>
-            For move <b>down</b>: <b><kbd>▼</kbd></b> or <b><kbd>j</kbd></b>.
-          </li>
-          <li>
-            For scroll <b>one page up</b>: <b><kbd>PgUp</kbd></b>, <b
-              ><kbd>l</kbd></b
-            > or <b><kbd>Ctrl+u</kbd></b>.
-          </li>
-          <li>
-            For scroll <b>one page down</b>: <b><kbd>PgDown</kbd></b>, <b
-              ><kbd>h</kbd></b
-            > or <b><kbd>Ctrl+d</kbd></b>.
-          </li>
-          <li>
-            For go to the <b>first</b> or <b>last</b> result: <b
-              ><kbd>HOME</kbd></b
-            >/<b><kbd>END</kbd></b>.
-          </li>
-          <li>
-            For <b>open result in file explorer</b> or <b>last</b>:
-            <b><kbd>o</kbd></b>.
-          </li>
-        </ul>
-      </section>
+        <div class="showcase-visual">
+          <div class="terminal-mini">
+            <div class="terminal-header">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="terminal-body">
+              <code>
+                <span class="prompt">$</span> npx npkill -p python<br />
+                <span class="comment"
+                  ># Finds __pycache__, .venv, .pytest_cache...</span
+                >
+              </code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <section class="content">
-        <NpkillOptions />
-      </section>
+    <section class="how-it-works">
+      <div class="content">
+        <span class="section-label">How it works</span>
+        <h2>Three steps to a cleaner disk</h2>
 
-      <section>
-        <CommunityWall limit={8} />
-      </section>
-    </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Run npkill</h3>
+            <p>
+              Execute <code>npx npkill</code> in your terminal. It starts scanning
+              immediately.
+            </p>
+          </div>
 
-    <div class="project-external-links">
-      <LinkButton link="https://github.com/voidcosmos/npkill" filled={false}
-        >View on GitHub</LinkButton
-      >
-      <LinkButton link="https://www.npmjs.com/package/npkill" filled={false}
-        >View on NPM</LinkButton
-      >
-    </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Navigate</h3>
+            <p>
+              Use <kbd>↑</kbd>/<kbd>↓</kbd> to browse results. Press <kbd>→</kbd
+              > for details.
+            </p>
+          </div>
 
-    <hr />
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Delete</h3>
+            <p>
+              Press <kbd>Del</kbd> to remove. Use multiselect (<kbd>t</kbd>) to
+              bulk delete.
+            </p>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a href="/docs" class="btn btn-primary">Read the docs</a>
+          <a href="/docs/commands" class="btn btn-ghost">View all commands</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <CommunityWall limit={8} />
+    </section>
+
+    <section class="project-links">
+      <div class="content">
+        <LinkButton link="https://github.com/voidcosmos/npkill" filled={false}>
+          <i class="bx bxl-github"></i> View on GitHub
+        </LinkButton>
+        <LinkButton link="https://www.npmjs.com/package/npkill" filled={false}>
+          <i class="bx bxl-npm"></i> View on NPM
+        </LinkButton>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
     <Devs />
-
     <Backers />
 
-    <div style="height: 100px"></div>
+    <div style="height: 60px"></div>
     <Footer />
   </main>
 </Layout>
 
 <style>
-  h2,
-  h3 {
+  .section-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
     text-align: center;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
   }
 
-  li {
-    list-style: none;
+  /* Profiles Showcase */
+  .profiles-showcase {
+    padding: 6rem 1.5rem;
+    background: var(--color-bg-dark);
   }
 
-  section {
-    margin-bottom: 4em;
+  .showcase-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
   }
 
-  .project-external-links {
-    text-align: center;
-    margin: 4em;
+  .showcase-content {
+    text-align: left;
+  }
+
+  .showcase-content h2 {
+    text-align: left;
+  }
+
+  .showcase-content p {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .profile-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .tag-more {
+    color: var(--color-primary);
+    border-color: rgba(241, 77, 77, 0.3);
+    background: rgba(241, 77, 77, 0.1);
+  }
+
+  .learn-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .learn-more:hover i {
+    transform: translateX(4px);
+  }
+
+  .learn-more i {
+    transition: transform 0.2s;
+  }
+
+  .showcase-visual {
+    display: flex;
     justify-content: center;
+  }
+
+  .terminal-mini {
+    background: var(--color-bg-darker);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(241, 77, 77, 0.1);
+  }
+
+  .terminal-mini .terminal-header {
+    background: var(--color-bg-card);
+    padding: 0.75rem 1rem;
+    display: flex;
+    gap: 6px;
+  }
+
+  .terminal-mini .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-border-light);
+  }
+
+  .terminal-mini .dot:nth-child(1) {
+    background: #ff5f57;
+  }
+  .terminal-mini .dot:nth-child(2) {
+    background: #ffbd2e;
+  }
+  .terminal-mini .dot:nth-child(3) {
+    background: #28ca42;
+  }
+
+  .terminal-mini .terminal-body {
+    padding: 1.25rem;
+  }
+
+  .terminal-mini code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--color-text);
+  }
+
+  .prompt {
+    color: var(--color-primary);
+  }
+
+  .comment {
+    color: var(--color-text-subtle);
+  }
+
+  /* How it works */
+  .how-it-works {
+    padding: 6rem 1.5rem;
+    background: var(--color-bg-darker);
+  }
+
+  .how-it-works .content {
+    max-width: 900px;
+    text-align: center;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .step {
+    text-align: center;
+  }
+
+  .step-number {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(241, 77, 77, 0.1);
+    border: 1px solid rgba(241, 77, 77, 0.2);
+    border-radius: 50%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 auto 1rem;
+  }
+
+  .step h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .step p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .cta-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: var(--color-primary-dark);
+    color: white;
+  }
+
+  .btn-ghost {
+    color: var(--color-text-muted);
+  }
+
+  .btn-ghost:hover {
+    color: var(--color-text);
+  }
+
+  /* Project links */
+  .project-links {
+    padding: 4rem 1.5rem;
+    background: var(--color-bg-dark);
+  }
+
+  .project-links .content {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .showcase-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .showcase-content {
+      text-align: center;
+    }
+
+    .showcase-content h2 {
+      text-align: center;
+    }
+
+    .profile-tags {
+      justify-content: center;
+    }
+
+    .steps {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .profiles-showcase,
+    .how-it-works {
+      padding: 4rem 1rem;
+    }
   }
 </style>

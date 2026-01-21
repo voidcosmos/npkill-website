@@ -1,5 +1,4 @@
 ---
-import LinkButton from "./LinkButton.astro";
 import { Image } from "astro:assets";
 
 interface Link {
@@ -11,16 +10,15 @@ interface Link {
 interface Props {
   image: string;
   name: string;
-  bio: string;
   links: Link[];
 }
 
 const { image, name, links = [] } = Astro.props;
 ---
 
-<div class="root card">
-  <div class="image-container">
-    <Image src={image} alt={name + " avatar"} width="128" height="128" />
+<div class="dev-card">
+  <div class="avatar">
+    <Image src={image} alt={name + " avatar"} width="96" height="96" />
   </div>
 
   <div class="info">
@@ -29,9 +27,15 @@ const { image, name, links = [] } = Astro.props;
     <div class="links">
       {
         links.map((link) => (
-          <LinkButton link={link.link}>
-            <i class={"bx " + link.icon} /> {link.name}
-          </LinkButton>
+          <a
+            href={link.link}
+            target="_blank"
+            rel="noopener"
+            class="social-link"
+            title={link.name}
+          >
+            <i class={"bx " + link.icon} />
+          </a>
         ))
       }
     </div>
@@ -39,39 +43,73 @@ const { image, name, links = [] } = Astro.props;
 </div>
 
 <style>
-  .card {
+  .dev-card {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-  }
-
-  .image-container {
-    width: 128px;
-    height: 128px;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
     border-radius: 12px;
-    overflow: hidden;
+    transition: border-color 0.2s;
+    min-width: 180px;
   }
 
-  .image-container img {
+  .dev-card:hover {
+    border-color: var(--color-border-light);
+  }
+
+  .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--color-border);
+  }
+
+  .avatar img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .name {
-    font-size: 1.4em;
-    font-weight: bold;
+    font-size: 1.1rem;
+    font-weight: 600;
     text-align: center;
+    color: var(--color-text);
   }
 
   .info {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
   }
 
   .links {
-    margin-top: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    transition: all 0.2s;
+  }
+
+  .social-link:hover {
+    color: var(--color-text);
+    border-color: var(--color-border-light);
+    background: var(--color-bg-card);
   }
 </style>

@@ -1,49 +1,105 @@
-<div class="root">
-  <div class="topbar">
-    <span class="title">npx npkill</span>
+<div class="terminal">
+  <div class="terminal-header">
+    <div class="window-controls">
+      <span class="control close"></span>
+      <span class="control minimize"></span>
+      <span class="control maximize"></span>
+    </div>
+    <span class="terminal-title">npx npkill</span>
+    <div class="header-spacer"></div>
   </div>
 
-  <img src="/img/npkill.gif" alt="Npkill gif demo" style="width: 100%" />
+  <div class="terminal-body">
+    <!-- IMAGE_PLACEHOLDER: Replace with updated npkill 1.0 demo GIF showing new features like profiles, panels, and multiselect -->
+    <img
+      src="/img/npkill.gif"
+      alt="Npkill 1.0 demo - showing profiles, panels, and multiselect features"
+    />
+  </div>
 </div>
 
 <style>
-  .root {
-    display: block;
+  .terminal {
     width: 90%;
-    max-width: 910px;
-    max-height: 500px;
+    max-width: 900px;
     margin: 0 auto;
-    background-color: #161616;
+    background-color: var(--color-bg-darker);
     border-radius: 12px;
-    transform: translateY(50px);
-    overflow-x: hidden;
+    overflow: hidden;
     position: relative;
     z-index: 5;
-
-    box-shadow: 0px 3px 18px #f13b62;
-    /*animation: glow 14s infinite;*/
+    border: 1px solid var(--color-border);
+    box-shadow:
+      0 0 0 1px rgba(241, 77, 77, 0.1),
+      0 4px 24px rgba(241, 77, 77, 0.15),
+      0 8px 48px rgba(241, 77, 77, 0.1);
   }
 
-  .topbar {
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: var(--color-bg-card);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .window-controls {
+    display: flex;
+    gap: 8px;
+  }
+
+  .control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-border-light);
+  }
+
+  .control.close {
+    background: #ff5f57;
+  }
+  .control.minimize {
+    background: #ffbd2e;
+  }
+  .control.maximize {
+    background: #28ca42;
+  }
+
+  .terminal-title {
+    flex: 1;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .header-spacer {
+    width: 52px;
+  }
+
+  .terminal-body {
+    background: var(--color-bg-darker);
+  }
+
+  .terminal-body img {
+    display: block;
     width: 100%;
-    background: #1f1f1f url("/img/window-btn.svg") no-repeat 0.3em;
-    display: grid;
-    padding: 3px;
+    height: auto;
   }
 
-  .topbar .title {
-    font-size: 0.6em;
-  }
+  @media (max-width: 600px) {
+    .terminal {
+      width: 95%;
+      border-radius: 8px;
+    }
 
-  @keyframes glow {
-    from {
-      box-shadow: 0px 3px 4px #f13b62;
+    .terminal-header {
+      padding: 0.5rem 0.75rem;
     }
-    50% {
-      box-shadow: 0px 3px 18px #f13b62;
-    }
-    to {
-      box-shadow: 0px 3px 4px #f13b62;
+
+    .control {
+      width: 10px;
+      height: 10px;
     }
   }
 </style>

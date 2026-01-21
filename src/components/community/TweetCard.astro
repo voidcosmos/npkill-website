@@ -9,80 +9,108 @@ const { profile } = Astro.props;
 const { profileImg, name, text, mediaSrc, date, source } = profile;
 ---
 
-<a href={source} target="_blank">
-  <div class="card">
-    <div class="header">
+<a href={source} target="_blank" rel="noopener" class="tweet-link">
+  <div class="tweet-card">
+    <div class="tweet-header">
       <img
         class="profile-image"
         loading="lazy"
         src={profileImg}
-        alt={name + "profile image"}
+        alt={name + " profile image"}
       />
-      <div>
-        <div>{name}</div>
+      <div class="tweet-meta">
+        <div class="name">{name}</div>
         <div class="date">
           {`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}
         </div>
       </div>
     </div>
 
-    <div class="body">
+    <div class="tweet-body">
       <p>{text}</p>
 
-      <div class="media">
-        {mediaSrc && <img src={mediaSrc} loading="lazy" alt="Tweet media" />}
-      </div>
+      {
+        mediaSrc && (
+          <div class="tweet-media">
+            <img src={mediaSrc} loading="lazy" alt="Tweet media" />
+          </div>
+        )
+      }
     </div>
   </div>
 </a>
 
 <style>
-  img {
-    max-width: 100%;
-  }
-
-  a {
+  .tweet-link {
     text-decoration: none;
-    color: white;
+    color: inherit;
+    display: block;
   }
 
-  .card {
-    width: 100%;
-    max-width: 400px;
+  .tweet-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1rem;
+    transition: border-color 0.2s;
     text-align: left;
-    display: inline-block;
-    border-radius: 8px;
-    box-shadow: 0 0 5px #797979;
-    padding: 7px;
-    box-sizing: border-box;
-    background-color: #13151ab8;
   }
 
-  .header {
+  .tweet-card:hover {
+    border-color: var(--color-border-light);
+  }
+
+  .tweet-header {
     display: flex;
-    gap: 12px;
-    font-size: 0.45em;
-  }
-
-  .date {
-    font-size: 0.8em;
-    opacity: 0.5;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
   }
 
   .profile-image {
-    width: 30px;
-    height: 30px;
-    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
   }
 
-  .body {
-    font-size: 0.5em;
-    line-height: 1.4;
+  .tweet-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .date {
+    font-size: 0.75rem;
+    color: var(--color-text-subtle);
+  }
+
+  .tweet-body {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+  }
+
+  .tweet-body p {
+    margin: 0;
     white-space: pre-line;
   }
 
-  .media {
+  .tweet-media {
+    margin-top: 0.75rem;
     border-radius: 8px;
     overflow: hidden;
+  }
+
+  .tweet-media img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 </style>

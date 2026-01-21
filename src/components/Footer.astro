@@ -1,70 +1,231 @@
 ---
-import { Image } from "astro:assets";
-import npkillFooterImg from "../../public/img/npkill-text-outlined.svg";
+
 ---
 
 <footer class="footer">
-  <div class="content">
-    <Image
-      class="npkill-title"
-      src={npkillFooterImg}
-      alt="npkill text logo"
-      width="500"
-    />
-    <p>
-      <img
-        alt="npm year downloads"
-        src="https://img.shields.io/npm/dy/npkill.svg"
-      />
-      <a
-        href="https://github.com/voidcosmos/npkill#coffee-buy-us-a-coffee"
-        target="_black"
-        ><img
-          src="https://img.shields.io/badge/donate-<3-red"
-          alt="Donations Badge"
-        /></a
-      >
+  <div class="footer-container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <span class="logo-np">np</span><span class="logo-kill">kill</span>
+        </a>
+        <p class="footer-tagline">Reclaim your disk space.</p>
+      </div>
 
-      <img alt="npm version" src="https://img.shields.io/npm/v/npkill.svg" />
-      <!-- <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/min/npkill.svg"> -->
-      <img alt="MIT license" src="https://img.shields.io/npm/l/npkill.svg" />
-    </p>
+      <div class="footer-links">
+        <div class="link-group">
+          <h4>Documentation</h4>
+          <a href="/docs">Getting Started</a>
+          <a href="/docs/commands">Commands</a>
+          <a href="/docs/profiles">Profiles</a>
+          <a href="/docs/npkillrc">Configuration</a>
+        </div>
 
-    <p>
-      Made with <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="15"
-        height="15"
-        viewBox="0 0 122.88 107.39"
-        ><defs
-          ><style>
-            .cls-1 {
-              fill: #ed1b24;
-              fill-rule: evenodd;
-            }
-          </style></defs
-        ><title>red-heart</title><path
-          class="cls-1"
-          d="M60.83,17.18c8-8.35,13.62-15.57,26-17C110-2.46,131.27,21.26,119.57,44.61c-3.33,6.65-10.11,14.56-17.61,22.32-8.23,8.52-17.34,16.87-23.72,23.2l-17.4,17.26L46.46,93.55C29.16,76.89,1,55.92,0,29.94-.63,11.74,13.73.08,30.25.29c14.76.2,21,7.54,30.58,16.89Z"
-        ></path></svg
-      >
-    </p>
+        <div class="link-group">
+          <h4>Community</h4>
+          <a href="/community">Wall of Love</a>
+          <a href="/changelog">Changelog</a>
+          <a
+            href="https://github.com/voidcosmos/npkill/issues"
+            target="_blank"
+            rel="noopener">Report a Bug</a
+          >
+          <a
+            href="https://github.com/voidcosmos/npkill/discussions"
+            target="_blank"
+            rel="noopener">Discussions</a
+          >
+        </div>
+
+        <div class="link-group">
+          <h4>Links</h4>
+          <a
+            href="https://github.com/voidcosmos/npkill"
+            target="_blank"
+            rel="noopener">GitHub</a
+          >
+          <a
+            href="https://www.npmjs.com/package/npkill"
+            target="_blank"
+            rel="noopener">npm</a
+          >
+          <a
+            href="https://github.com/voidcosmos/npkill?tab=readme-ov-file#coffee-buy-us-a-coffee"
+            target="_blank"
+            rel="noopener">Support Us</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-badges">
+        <img
+          alt="npm downloads"
+          src="https://img.shields.io/npm/dy/npkill.svg?style=flat-square&color=F14D4D"
+        />
+        <img
+          alt="npm version"
+          src="https://img.shields.io/npm/v/npkill.svg?style=flat-square"
+        />
+        <img
+          alt="MIT license"
+          src="https://img.shields.io/npm/l/npkill.svg?style=flat-square"
+        />
+      </div>
+
+      <p class="footer-copy">
+        Made with
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="heart-icon"
+        >
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+          ></path>
+        </svg>
+        by <a
+          href="https://github.com/voidcosmos"
+          target="_blank"
+          rel="noopener">voidcosmos</a
+        >
+      </p>
+    </div>
   </div>
 </footer>
 
 <style>
-  .content {
-    text-align: center;
+  .footer {
+    background: var(--color-bg-darker);
+    border-top: 1px solid var(--color-border);
+    padding: 4rem 1.5rem 2rem;
   }
 
-  .npkill-title {
-    opacity: 0.7;
-    transition: 0.3s;
-    width: 100%;
-    max-width: 500px;
+  .footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
   }
 
-  .npkill-title:hover {
-    opacity: 1;
+  .footer-main {
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand {
+    max-width: 250px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .logo-np {
+    color: var(--color-text);
+  }
+
+  .logo-kill {
+    color: var(--color-primary);
+  }
+
+  .footer-tagline {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin: 0.5rem 0 0;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 4rem;
+  }
+
+  .link-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .link-group h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .link-group a {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .link-group a:hover {
+    color: var(--color-text);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-badges {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .footer-badges img {
+    height: 20px;
+  }
+
+  .footer-copy {
+    font-size: 0.85rem;
+    color: var(--color-text-subtle);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .footer-copy a {
+    color: var(--color-text-muted);
+  }
+
+  .footer-copy a:hover {
+    color: var(--color-text);
+  }
+
+  .heart-icon {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .footer-main {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .footer-links {
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 </style>

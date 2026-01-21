@@ -1,0 +1,613 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+import CodeBlock from "../components/docs/CodeBlock.astro";
+import ImagePlaceholder from "../components/docs/ImagePlaceholder.astro";
+---
+
+<Layout
+  title="Changelog - npkill 1.0"
+  description="What's new in npkill 1.0 - profiles, panels, multiselect, filters, and more."
+>
+  <main class="changelog-page">
+    <article class="changelog-content">
+      <header class="changelog-header">
+        <span class="version-badge">v1.0.0</span>
+        <h1>npkill 1.0 is here</h1>
+        <p class="subtitle">The rules of the game have changed</p>
+        <time datetime="2026-02-01">February 1, 2026</time>
+      </header>
+
+      <div class="tldr">
+        <h2>TL;DR</h2>
+        <ul>
+          <li>npkill works the same by default — nothing to relearn</li>
+          <li>
+            Now it can clean up much more than just <code>node_modules</code>
+          </li>
+          <li>It's faster, safer, and more flexible</li>
+          <li>You don't have to learn anything new if you don't want to</li>
+        </ul>
+      </div>
+
+      <p>
+        Over time, I discovered that similar solutions started appearing for
+        other environments. That's when I realized the problem wasn't just in
+        Node.js.
+      </p>
+      <p>
+        Not only that, but in day-to-day work, although <code>node_modules</code
+        > stole the spotlight, they weren't even close to being the biggest problem
+        (even if they stood out the most).
+      </p>
+      <p>
+        Temporary files, cache files, build artifacts... All of them add up.
+      </p>
+
+      <nav class="toc">
+        <h3>Contents</h3>
+        <ul>
+          <li><a href="#whats-new">What's new</a></li>
+          <li><a href="#whats-changed">What's changed</a></li>
+          <li><a href="#bug-fixes">Bug fixes</a></li>
+          <li><a href="#acknowledgements">Acknowledgements</a></li>
+        </ul>
+      </nav>
+
+      <h2 id="whats-new">What's New</h2>
+
+      <h3 id="profiles">Profiles — More than a node_modules tool</h3>
+      <p>
+        This is probably the most important change in npkill's history. And in a
+        few seconds, you'll understand why.
+      </p>
+      <p>
+        Now there isn't a default <code>target</code>, but rather a <strong
+          >profile</strong
+        >: <code>node</code>.
+      </p>
+      <p>
+        Until now, npkill was designed to work with a single <code>target</code
+        >, which by default was <code>node_modules</code>. Profiles bring
+        multiple targets under one umbrella.
+      </p>
+      <p>
+        The <code>node</code> profile includes <code>node_modules</code>, but
+        also other heavy and expendable directories like <code>.next</code>, <code
+          >.nx</code
+        >, <code>.cache</code>, or <code>.angular</code>, among others.
+      </p>
+      <p>
+        But that's not all. By default, npkill now includes many other profiles
+        like <code>python</code>, which helps you deal with heavy <code
+          >__pycache__</code
+        >, <code>.venv</code>, or <code>.pytest_cache</code> directories.
+      </p>
+      <p>
+        <strong>Do you see the power of profiles?</strong>
+      </p>
+      <p>
+        We've included 17 profiles to help developers working with Godot, Rust,
+        Unity, and more. And of course, you can create your own thanks to the <a
+          href="#npkillrc">.npkillrc</a
+        > file.
+      </p>
+      <p>
+        Don't worry — this change won't affect you. By default, npkill will
+        continue listing
+        <code>node_modules</code>.
+      </p>
+      <p>
+        You can see all available profiles by running <code
+          >npkill --profiles</code
+        > or check out the <a href="/docs/profiles">profiles documentation</a>.
+      </p>
+
+      <h3 id="panels">Panels</h3>
+      <p>
+        Panels add a new dimension to npkill. Previously, the only view
+        available in the TUI was the results list.
+      </p>
+      <p>
+        Now we've added 3 new views transparently. That is, you can use them if
+        you want, and if not, it won't affect how you used npkill before.
+      </p>
+      <p>
+        These panels are shown in the top bar, and by default <code>DELETE</code
+        > is displayed.
+      </p>
+      <p>
+        You can navigate between them laterally with <kbd>←</kbd>/<kbd>h</kbd> or
+        <kbd>→</kbd>/<kbd>l</kbd>.
+      </p>
+
+      <h4>Result Information</h4>
+      <p>
+        From the results view, you can press <kbd>→</kbd> to see details about the
+        result under the cursor.
+      </p>
+      <p>
+        Among the details, you'll find the exact date of the last file
+        modification, whether it can be safely deleted, and information about
+        the specific directory.
+      </p>
+      <p>
+        The full path is also shown, so you can copy it or open the parent
+        directory with <kbd>o</kbd>.
+      </p>
+
+      <ImagePlaceholder
+        alt="npkill info panel"
+        description="The info panel shows details about the selected directory including last modification date and risk analysis."
+      />
+
+      <h4>Live Options Panel</h4>
+      <p>
+        With the <strong>options panel</strong>, you can modify any parameter
+        without restarting npkill and specifying them with flags.
+      </p>
+      <p>For example, you can change the sort order of results in real time.</p>
+      <p>
+        You can also change the <code>cwd</code> or targets. When you do, npkill
+        will restart the search with the new settings.
+      </p>
+
+      <ImagePlaceholder
+        alt="npkill options panel"
+        description="The options panel allows you to change settings like sort order, targets, and working directory on the fly."
+      />
+
+      <h4>Help Panel</h4>
+      <p>
+        The number of options and shortcuts has kept growing. To prevent you
+        from having to memorize them all and to ensure you don't miss powerful
+        shortcuts, I've added the "help" panel where you can consult all the
+        possibilities for your workflow.
+      </p>
+
+      <ImagePlaceholder
+        alt="npkill help panel"
+        description="The help panel shows all available keyboard shortcuts and commands."
+      />
+
+      <h3 id="multiselect">Multiselect — Optimizing your workflow</h3>
+      <p>
+        This new mode allows you to select multiple results to delete them all
+        at once, instead of going one by one.
+      </p>
+      <p>
+        You can toggle this mode with the <kbd>t</kbd> key.
+      </p>
+      <p>In multiselect mode, the controls change to:</p>
+      <ul>
+        <li><kbd>Space</kbd>: Select/deselect the current result</li>
+        <li><kbd>Enter</kbd>: Delete selected results</li>
+        <li><kbd>a</kbd>: Select/deselect all</li>
+        <li><kbd>v</kbd>: Select a range of results</li>
+        <li><kbd>t</kbd>: Cancel and exit without deleting</li>
+      </ul>
+
+      <ImagePlaceholder
+        alt="npkill multiselect demo"
+        description="Multiselect mode in action - select multiple directories and delete them all at once."
+        aspectRatio="16/9"
+      />
+
+      <h3 id="filter">Result Filter — We didn't know we needed it</h3>
+      <p>
+        Now that npkill has become a much more useful tool, we need ways to
+        comfortably manage all the findings it discovers.
+      </p>
+      <p>This new feature lets you filter visible results.</p>
+      <p>Is this useful? Very.</p>
+      <p>
+        Because simply by pressing <kbd>/</kbd>, you can not only check if a
+        certain directory is present and see its info, but also <strong
+          >filter by paths</strong
+        >.
+      </p>
+      <p>
+        Imagine you do a full scan of your home and npkill finds tens of
+        gigabytes to free up in hundreds of different places scattered
+        everywhere. Instead of running npkill in each sub-directory, you can
+        directly type that path and check the results one by one.
+      </p>
+      <p>
+        Of course, you can also combine it with <strong>multiselect</strong> mode
+        to delete everything matching your filter in one pass.
+      </p>
+      <p>
+        And if you're really pro, <strong>you can use regex</strong>. What more
+        could you ask for?
+      </p>
+
+      <ImagePlaceholder
+        alt="npkill search filter"
+        description="Filter results by path or regex pattern."
+      />
+
+      <h3 id="npkillrc">.npkillrc</h3>
+      <p>
+        You probably belong to the group of people who use this tool regularly
+        as a maintenance and cleanup routine. And you're probably tired of
+        launching it while always defining your personal parameters (unless you
+        have an alias in your shell).
+      </p>
+      <p>
+        In this optional file, you can define npkill's default behavior. From
+        the
+        <code>cwd</code> or default <strong>profile</strong>, to settings or
+        custom profiles — you can define it all here.
+      </p>
+      <p>
+        By default, npkill looks for the file <code>~/.npkillrc</code> at startup,
+        but you can also specify it with the <code>--config</code> or <code
+          >-c</code
+        > flag.
+      </p>
+      <p>The priority order for options is:</p>
+      <ol>
+        <li>Options defined in <code>.npkillrc</code></li>
+        <li>Options defined in CLI during launch</li>
+        <li>Options modified (temporarily) in the options panel</li>
+      </ol>
+      <p>
+        Check out the <a href="/docs/npkillrc"
+          >complete .npkillrc documentation</a
+        >.
+      </p>
+
+      <h4>Custom Profiles</h4>
+      <p>
+        You can create profiles to your liking by defining them in the <code
+          >.npkillrc</code
+        > file.
+      </p>
+
+      <CodeBlock
+        code={`{
+  "profiles": {
+    "webdev": {
+      "description": "Frontend web development artifacts and build outputs",
+      "targets": ["dist", ".next", ".nuxt", ".output"]
+    },
+    "mystack": {
+      "description": "Full-stack project artifacts (JS/Python/Java)",
+      "targets": ["venv", ".venv", "target", "__pycache__", ".gradle"]
+    },
+    "mobile": {
+      "description": "Mobile platform build folders and caches",
+      "targets": ["Pods", "build", "DerivedData", "gradle"]
+    }
+  }
+}`}
+        lang="json"
+        filename="~/.npkillrc"
+      />
+
+      <p>
+        The profiles you define will override the pre-defined ones in npkill.
+      </p>
+
+      <h3>Result Counter</h3>
+      <p>
+        In the upper right corner, you'll see a summary of the results that have
+        been found, as well as the active <strong>profiles</strong>.
+      </p>
+
+      <ImagePlaceholder
+        alt="Result counter"
+        description="The result counter shows found items and active profiles."
+        aspectRatio="4/1"
+      />
+
+      <h3>Scrollbar</h3>
+      <p>
+        How much is left until the end? Now you can get an idea with the <code
+          >scrollbar</code
+        >, which gives you a sense of your current position relative to the
+        results list.
+      </p>
+
+      <ImagePlaceholder
+        alt="Scrollbar demo"
+        description="The new scrollbar shows your position in the results list."
+        aspectRatio="4/3"
+      />
+
+      <h3 id="json-mode">JSON Mode</h3>
+      <p>
+        Two new flags have been added that completely disable the TUI and only
+        print results:
+      </p>
+      <ul>
+        <li>
+          <code>--json</code>: Collects all results and prints them as a single
+          JSON object.
+        </li>
+        <li>
+          <code>--json-stream</code>: Prints each result as an independent JSON
+          object on its own line as soon as it's found. Useful for real-time
+          processing or when dealing with large scans where you want to start
+          processing results immediately.
+        </li>
+      </ul>
+
+      <h3>API</h3>
+      <p>
+        Before, the entire package was one unit. That is, npkill was only what
+        you saw — what you could interact with directly.
+      </p>
+      <p>
+        I've refactored the project to separate the <strong>core engine</strong>
+        (<code>core</code>) from everything related to the <strong>TUI</strong> (<code
+          >cli</code
+        >).
+      </p>
+      <p>
+        <strong>What does this mean for the average user?</strong> Nothing.
+      </p>
+      <p>
+        <strong>What does this mean for the advanced user?</strong> That now you
+        can import the <code>core</code> of <code>npkill</code> in any Node.js program
+        and use it programmatically. Whether to create your own implementations using
+        the project's powerful search engine.
+      </p>
+
+      <h2 id="whats-changed">What's Changed</h2>
+
+      <h3>Risk Analyzer</h3>
+      <p>
+        Not all found directories are bad. For example, some applications like
+        Spotify or Discord need their own <code>node_modules</code> intact to work
+        correctly.
+      </p>
+      <p>
+        Path patterns have been improved to make these warnings more reliable.
+        Additionally, you can see an explanation of why it was marked as
+        "sensitive" in the <strong>info panel</strong>.
+      </p>
+
+      <h3>Fluidity and Optimization</h3>
+      <p>
+        npkill handles search operations at a very low level. I'm always
+        tweaking parameters to achieve the best performance and speed values.
+      </p>
+      <p>Size calculation has been decoupled from the main thread.</p>
+
+      <h3>Automatic Unit Adjustment</h3>
+      <p>
+        Before, everything was shown in <code>MB</code>. Now, unless you specify
+        it with
+        <code>--size-unit</code>, the unit will adapt between <code>MB</code> and
+        <code>GB</code>.
+      </p>
+
+      <h3>More Stability</h3>
+      <p>General stability improvements across the board.</p>
+
+      <h3>Removed Color Customization</h3>
+      <p>
+        Until now, it was possible to adjust the cursor color with <code
+          >--color</code
+        >, but I've removed it because it didn't add much beyond complexity.
+      </p>
+      <p>
+        However, there's a better explanation: you can now adjust that color and
+        all others by adjusting the <em>colorscheme</em> of your terminal. So it's
+        something you surely won't miss.
+      </p>
+
+      <h3>Other Changes</h3>
+      <ul>
+        <li>
+          Changed <code>--target</code> to <code>--targets</code> to specify a list
+          of directories
+        </li>
+        <li>Changed the text <code>Last_mod</code> to <code>Age</code></li>
+        <li>Improved "No results" message</li>
+        <li>
+          Style improvements when <em>size</em> or <em>age</em> is being calculated
+        </li>
+        <li>Legibility improvements</li>
+        <li>Improved <code>--help</code> output</li>
+        <li>Simplified banner</li>
+        <li>Symbolic links are now ignored during search</li>
+        <li>
+          Fixed result flickering when a sort criterion is defined and both have
+          the same value
+        </li>
+      </ul>
+
+      <h2 id="bug-fixes">Bug Fixes</h2>
+      <ul>
+        <li>
+          <strong>TTY</strong>: The TTY restriction for launching npkill has
+          been removed.
+        </li>
+      </ul>
+
+      <h2 id="acknowledgements">Acknowledgements</h2>
+      <p>
+        This version of npkill 1.0 is the result of years of feedback, bug
+        reports, and contributions. None of this would be what it is today
+        without all of you and the love you've given the project all this time.
+      </p>
+      <p>
+        If you like npkill, don't hesitate to leave us a big ⭐️ on
+        <a href="https://github.com/voidcosmos/npkill">GitHub</a> and
+        <a
+          href="https://github.com/voidcosmos/npkill?tab=readme-ov-file#coffee-buy-us-a-coffee"
+          >support us financially</a
+        >.
+      </p>
+      <p>And of course, don't hesitate to try all these changes with:</p>
+
+      <CodeBlock code="npx npkill@latest" />
+
+      <p>
+        See you very soon!<br />
+        <em>— Zaldih</em>
+      </p>
+    </article>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  .changelog-page {
+    background: var(--color-bg-dark);
+    min-height: 100vh;
+  }
+
+  .changelog-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+
+  .changelog-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .version-badge {
+    display: inline-block;
+    background: var(--color-primary);
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .changelog-header h1 {
+    font-size: 2.5rem;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    margin: 0 0 0.5rem;
+  }
+
+  time {
+    font-size: 0.9rem;
+    color: var(--color-text-subtle);
+  }
+
+  .tldr {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .tldr h2 {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    color: var(--color-primary);
+    border: none;
+    padding: 0;
+  }
+
+  .tldr ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--color-text-muted);
+  }
+
+  .tldr li {
+    margin-bottom: 0.25rem;
+  }
+
+  .toc {
+    background: var(--color-bg-darker);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .toc h3 {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.75rem;
+  }
+
+  .toc ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+
+  .toc a {
+    font-size: 0.9rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    margin: 3rem 0 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    margin: 2rem 0 1rem;
+    color: var(--color-text);
+  }
+
+  h4 {
+    font-size: 1rem;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--color-text);
+  }
+
+  p {
+    color: var(--color-text-muted);
+    margin: 0 0 1rem;
+  }
+
+  ul,
+  ol {
+    color: var(--color-text-muted);
+    margin: 0 0 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .changelog-content {
+      padding: 2rem 1rem;
+    }
+
+    .changelog-header h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .toc ul {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+</style>

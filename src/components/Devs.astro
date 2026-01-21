@@ -3,92 +3,119 @@ import DevCard from "./DevCard.astro";
 import LinkButton from "./LinkButton.astro";
 ---
 
-<div class="content">
-  <h2>The team</h2>
+<section class="team-section">
+  <div class="team-container">
+    <span class="section-label">Team</span>
+    <h2>Made by developers, for developers</h2>
 
-  <div class="dev-cards">
-    <DevCard
-      image="/img/juan-profile.png"
-      name="Juan Torres"
-      bio="blablabla"
-      links={[
-        {
-          name: "Web",
-          icon: "bx-world",
-          link: "https://imzaldih.com",
-        },
-        {
-          name: "GitHub",
-          icon: "bxl-github",
-          link: "https://github.com/zaldih",
-        },
-        {
-          name: "Twitter",
-          icon: "bxl-twitter",
-          link: "https://x.com/imzaldih",
-        },
-      ]}
-    />
+    <div class="dev-cards">
+      <DevCard
+        image="/img/juan-profile.png"
+        name="Juan Torres"
+        links={[
+          {
+            name: "Web",
+            icon: "bx-world",
+            link: "https://zaldih.com",
+          },
+          {
+            name: "GitHub",
+            icon: "bxl-github",
+            link: "https://github.com/zaldih",
+          },
+          {
+            name: "Twitter",
+            icon: "bxl-twitter",
+            link: "https://x.com/imzaldih",
+          },
+        ]}
+      />
 
-    <DevCard
-      image="/img/nya-profile.jpg"
-      name="Nya García"
-      bio="blablabla"
-      links={[
-        {
-          name: "GitHub",
-          icon: "bxl-github",
-          link: "https://github.com/NyaGarcia",
-        },
-        {
-          name: "Twitter",
-          icon: "bxl-twitter",
-          link: "https://x.com/NyaBlk",
-        },
-      ]}
-    />
+      <DevCard
+        image="/img/nya-profile.jpg"
+        name="Nya García"
+        links={[
+          {
+            name: "GitHub",
+            icon: "bxl-github",
+            link: "https://github.com/NyaGarcia",
+          },
+          {
+            name: "Twitter",
+            icon: "bxl-twitter",
+            link: "https://x.com/NyaBlk",
+          },
+        ]}
+      />
 
-    <DevCard
-      image="/img/carlos-profile.jpg"
-      name="Carlos Caballero"
-      bio="blablabla"
-      links={[
-        {
-          name: "Web",
-          icon: "bx-world",
-          link: "https://carloscaballero.io",
-        },
-        {
-          name: "GitHub",
-          icon: "bxl-github",
-          link: "https://github.com/Caballerog",
-        },
-        {
-          name: "Twitter",
-          icon: "bxl-twitter",
-          link: "https://x.com/Carlillo",
-        },
-      ]}
-    />
+      <DevCard
+        image="/img/carlos-profile.jpg"
+        name="Carlos Caballero"
+        links={[
+          {
+            name: "Web",
+            icon: "bx-world",
+            link: "https://carloscaballero.io",
+          },
+          {
+            name: "GitHub",
+            icon: "bxl-github",
+            link: "https://github.com/Caballerog",
+          },
+          {
+            name: "Twitter",
+            icon: "bxl-twitter",
+            link: "https://x.com/Carlillo",
+          },
+        ]}
+      />
+    </div>
+
+    <div class="team-cta">
+      <LinkButton
+        link="https://github.com/voidcosmos/npkill/graphs/contributors"
+        filled={false}>View all contributors</LinkButton
+      >
+    </div>
   </div>
-
-  <div style="text-align:center; margin-top: 2em">
-    <LinkButton
-      link="https://github.com/voidcosmos/npkill/graphs/contributors"
-      filled={false}>View all contributors</LinkButton
-    >
-  </div>
-</div>
+</section>
 
 <style>
-  h2 {
+  .team-section {
+    padding: 5rem 1.5rem;
+    background: var(--color-bg-dark);
+  }
+
+  .team-container {
+    max-width: 1100px;
+    margin: 0 auto;
     text-align: center;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: 0 0 3rem;
+    letter-spacing: -0.02em;
   }
 
   .dev-cards {
     display: flex;
-    gap: 48px;
+    gap: 2rem;
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .team-cta {
+    margin-top: 2.5rem;
   }
 </style>

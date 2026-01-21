@@ -1,0 +1,116 @@
+---
+interface Props {
+  code: string;
+  lang?: string;
+  filename?: string;
+}
+
+const { code, lang = "bash", filename } = Astro.props;
+const id = `code-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div class="code-block">
+  {
+    filename && (
+      <div class="code-header">
+        <span class="code-filename">{filename}</span>
+      </div>
+    )
+  }
+  <div class="code-container">
+    <pre><code id={id} class={`language-${lang}`}>{code}</code></pre>
+    <button class="copy-btn" data-code-id={id} aria-label="Copy code">
+      <i class="bx bx-copy"></i>
+    </button>
+  </div>
+</div>
+
+<style>
+  .code-block {
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-darker);
+  }
+
+  .code-header {
+    padding: 0.5rem 1rem;
+    background: var(--color-bg-card);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .code-filename {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .code-container {
+    position: relative;
+  }
+
+  pre {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  code {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    padding: 0.4rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: all 0.2s;
+  }
+
+  .code-container:hover .copy-btn {
+    opacity: 1;
+  }
+
+  .copy-btn:hover {
+    background: var(--color-bg-card);
+    color: var(--color-text);
+  }
+</style>
+
+<script>
+  document.querySelectorAll(".copy-btn[data-code-id]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const codeId = btn.getAttribute("data-code-id");
+      const codeEl = document.getElementById(codeId!);
+      if (codeEl) {
+        try {
+          await navigator.clipboard.writeText(codeEl.textContent || "");
+          const icon = btn.querySelector("i");
+          if (icon) {
+            icon.classList.remove("bx-copy");
+            icon.classList.add("bx-check");
+            setTimeout(() => {
+              icon.classList.remove("bx-check");
+              icon.classList.add("bx-copy");
+            }, 2000);
+          }
+        } catch (err) {
+          console.error("Failed to copy:", err);
+        }
+      }
+    });
+  });
+</script>

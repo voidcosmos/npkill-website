@@ -1,0 +1,253 @@
+---
+import DocLayout from "../../components/docs/DocLayout.astro";
+import CodeBlock from "../../components/docs/CodeBlock.astro";
+import ImagePlaceholder from "../../components/docs/ImagePlaceholder.astro";
+---
+
+<DocLayout
+  title="Profiles"
+  description="Learn how to use npkill profiles to clean up more than just node_modules - Python, Rust, Godot, and more."
+>
+  <h1>Profiles</h1>
+  <p class="lead">
+    Profiles are one of the biggest features in npkill 1.0. They let you clean
+    up much more than just <code>node_modules</code> — think Python virtual environments,
+    Rust build artifacts, game engine caches, and more.
+  </p>
+
+  <h2>What are Profiles?</h2>
+  <p>
+    A profile is a collection of target directories that belong together.
+    Instead of specifying individual targets, you can use a profile to search
+    for all related directories at once.
+  </p>
+  <p>
+    For example, the <code>node</code> profile includes not just <code
+      >node_modules</code
+    >, but also <code>.next</code>, <code>.nx</code>, <code>.cache</code>, <code
+      >.angular</code
+    >, and other heavy directories commonly found in Node.js projects.
+  </p>
+
+  <h2>Using Profiles</h2>
+  <p>Use the <code>-p</code> or <code>--profile</code> flag:</p>
+
+  <CodeBlock code="npx npkill -p python" />
+
+  <p>By default, npkill uses the <code>node</code> profile.</p>
+
+  <h2>Available Profiles</h2>
+  <p>
+    npkill 1.0 ships with 17 built-in profiles. Run <code
+      >npkill --profiles</code
+    > to see all of them.
+  </p>
+
+  <h3>Web Development</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Profile</th>
+        <th>Targets</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>node</code></td>
+        <td
+          ><code>node_modules</code>, <code>.next</code>, <code>.nx</code>, <code
+            >.nuxt</code
+          >, <code>.cache</code>, <code>.angular</code>, <code>.turbo</code>, <code
+            >.parcel-cache</code
+          ></td
+        >
+      </tr>
+      <tr>
+        <td><code>frontend</code></td>
+        <td
+          ><code>dist</code>, <code>build</code>, <code>.next</code>, <code
+            >.nuxt</code
+          >, <code>.output</code>, <code>.svelte-kit</code></td
+        >
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Programming Languages</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Profile</th>
+        <th>Targets</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>python</code></td>
+        <td
+          ><code>__pycache__</code>, <code>.venv</code>, <code>venv</code>, <code
+            >.pytest_cache</code
+          >, <code>.mypy_cache</code>, <code>.tox</code></td
+        >
+      </tr>
+      <tr>
+        <td><code>rust</code></td>
+        <td><code>target</code></td>
+      </tr>
+      <tr>
+        <td><code>go</code></td>
+        <td><code>vendor</code>, <code>bin</code></td>
+      </tr>
+      <tr>
+        <td><code>java</code></td>
+        <td><code>target</code>, <code>.gradle</code>, <code>build</code></td>
+      </tr>
+      <tr>
+        <td><code>dotnet</code></td>
+        <td><code>bin</code>, <code>obj</code>, <code>packages</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Mobile Development</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Profile</th>
+        <th>Targets</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>ios</code></td>
+        <td><code>Pods</code>, <code>DerivedData</code>, <code>build</code></td>
+      </tr>
+      <tr>
+        <td><code>android</code></td>
+        <td><code>.gradle</code>, <code>build</code></td>
+      </tr>
+      <tr>
+        <td><code>flutter</code></td>
+        <td><code>build</code>, <code>.dart_tool</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Game Development</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Profile</th>
+        <th>Targets</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>godot</code></td>
+        <td><code>.godot</code>, <code>.import</code></td>
+      </tr>
+      <tr>
+        <td><code>unity</code></td>
+        <td
+          ><code>Library</code>, <code>Temp</code>, <code>Obj</code>, <code
+            >Build</code
+          ></td
+        >
+      </tr>
+      <tr>
+        <td><code>unreal</code></td>
+        <td
+          ><code>Binaries</code>, <code>Intermediate</code>, <code>Saved</code>, <code
+            >DerivedDataCache</code
+          ></td
+        >
+      </tr>
+    </tbody>
+  </table>
+
+  <ImagePlaceholder
+    alt="Profile result counter showing active profiles"
+    description="The result counter shows which profiles are active and how many items were found for each target type."
+  />
+
+  <h2>Combining Profiles with Custom Targets</h2>
+  <p>You can use a profile as a base and add additional targets:</p>
+
+  <CodeBlock code='npx npkill -p node --targets ".tmp,coverage"' />
+
+  <h2>Custom Profiles</h2>
+  <p>
+    You can create your own profiles in the <a href="/docs/npkillrc"
+      >.npkillrc</a
+    > configuration file:
+  </p>
+
+  <CodeBlock
+    code={`{
+  "profiles": {
+    "webdev": {
+      "description": "Frontend web development artifacts",
+      "targets": ["dist", ".next", ".nuxt", ".output"]
+    },
+    "mystack": {
+      "description": "Full-stack project artifacts (JS/Python/Java)",
+      "targets": ["venv", ".venv", "target", "__pycache__", ".gradle"]
+    },
+    "mobile": {
+      "description": "Mobile platform build folders and caches",
+      "targets": ["Pods", "build", "DerivedData", "gradle"]
+    }
+  }
+}`}
+    lang="json"
+    filename="~/.npkillrc"
+  />
+
+  <p>Custom profiles will override built-in profiles with the same name.</p>
+
+  <h2>Why Profiles Matter</h2>
+  <p>
+    Before npkill 1.0, you had to manually specify targets or run npkill
+    multiple times for different project types. Profiles solve this by grouping
+    related directories together, making it easy to clean up entire development
+    stacks with a single command.
+  </p>
+
+  <div class="tip">
+    <i class="bx bx-bulb"></i>
+    <div>
+      <strong>Pro tip:</strong> Set a default profile in your <code
+        >.npkillrc</code
+      >
+      so npkill always uses your preferred configuration.
+    </div>
+  </div>
+</DocLayout>
+
+<style>
+  .lead {
+    font-size: 1.15rem;
+    color: var(--color-text) !important;
+    margin-bottom: 2rem;
+  }
+
+  .tip {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(241, 77, 77, 0.1);
+    border: 1px solid rgba(241, 77, 77, 0.2);
+    border-radius: 8px;
+    margin: 1.5rem 0;
+  }
+
+  .tip i {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .tip strong {
+    color: var(--color-text);
+  }
+</style>

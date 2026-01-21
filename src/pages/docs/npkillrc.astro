@@ -1,0 +1,253 @@
+---
+import DocLayout from "../../components/docs/DocLayout.astro";
+import CodeBlock from "../../components/docs/CodeBlock.astro";
+---
+
+<DocLayout
+  title="Configuration (.npkillrc)"
+  description="Learn how to configure npkill with a .npkillrc file for custom defaults, profiles, and more."
+>
+  <h1>Configuration (.npkillrc)</h1>
+  <p class="lead">
+    The <code>.npkillrc</code> file lets you configure npkill's default behavior,
+    create custom profiles, and save your preferences so you don't have to specify
+    them every time.
+  </p>
+
+  <h2>File Location</h2>
+  <p>
+    By default, npkill looks for <code>~/.npkillrc</code> in your home directory.
+    You can also specify a custom config file with the <code>-c</code> flag:
+  </p>
+
+  <CodeBlock code="npx npkill -c /path/to/my-config.json" />
+
+  <h2>Configuration Options</h2>
+  <p>
+    The <code>.npkillrc</code> file uses JSON format. Here's a complete example:
+  </p>
+
+  <CodeBlock
+    code={`{
+  "defaultProfile": "node",
+  "directory": "~/projects",
+  "sort": "size",
+  "excludeHiddenDirectories": false,
+  "showErrors": false,
+  "noCheckUpdate": false,
+  "profiles": {
+    "webdev": {
+      "description": "Frontend artifacts and build outputs",
+      "targets": ["dist", ".next", ".nuxt", ".output", "build"]
+    }
+  }
+}`}
+    lang="json"
+    filename="~/.npkillrc"
+  />
+
+  <h3>Available Options</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Option</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>defaultProfile</code></td>
+        <td>string</td>
+        <td>Profile to use by default (e.g., "node", "python")</td>
+      </tr>
+      <tr>
+        <td><code>directory</code></td>
+        <td>string</td>
+        <td>Default directory to start searching from</td>
+      </tr>
+      <tr>
+        <td><code>targets</code></td>
+        <td>string[]</td>
+        <td>Default target directories to search for</td>
+      </tr>
+      <tr>
+        <td><code>sort</code></td>
+        <td>string</td>
+        <td>Default sort order: "size", "path", or "last-mod"</td>
+      </tr>
+      <tr>
+        <td><code>exclude</code></td>
+        <td>string[]</td>
+        <td>Directories to always exclude from search</td>
+      </tr>
+      <tr>
+        <td><code>excludeHiddenDirectories</code></td>
+        <td>boolean</td>
+        <td>Whether to exclude hidden (dot) directories</td>
+      </tr>
+      <tr>
+        <td><code>showErrors</code></td>
+        <td>boolean</td>
+        <td>Whether to display error messages</td>
+      </tr>
+      <tr>
+        <td><code>noCheckUpdate</code></td>
+        <td>boolean</td>
+        <td>Disable update checks on startup</td>
+      </tr>
+      <tr>
+        <td><code>profiles</code></td>
+        <td>object</td>
+        <td>Custom profile definitions</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Custom Profiles</h2>
+  <p>
+    You can define your own profiles in the <code>profiles</code> section. Each profile
+    needs a name, description, and list of targets:
+  </p>
+
+  <CodeBlock
+    code={`{
+  "profiles": {
+    "mystack": {
+      "description": "My full-stack development artifacts",
+      "targets": [
+        "node_modules",
+        "dist",
+        ".next",
+        "__pycache__",
+        ".venv",
+        "target"
+      ]
+    }
+  }
+}`}
+    lang="json"
+    filename="~/.npkillrc"
+  />
+
+  <p>Then use it with:</p>
+
+  <CodeBlock code="npx npkill -p mystack" />
+
+  <div class="warning">
+    <i class="bx bx-error"></i>
+    <div>
+      Custom profiles with the same name as built-in profiles will override
+      them.
+    </div>
+  </div>
+
+  <h2>Priority Order</h2>
+  <p>
+    Options are applied in this order (later options override earlier ones):
+  </p>
+
+  <ol>
+    <li><strong>.npkillrc file</strong> — Default configuration</li>
+    <li><strong>CLI flags</strong> — Command-line arguments</li>
+    <li>
+      <strong>Options panel</strong> — Changes made in the TUI options panel (temporary)
+    </li>
+  </ol>
+
+  <p>
+    This means you can set sensible defaults in your <code>.npkillrc</code> and override
+    them when needed with CLI flags.
+  </p>
+
+  <h2>Example Configurations</h2>
+
+  <h3>JavaScript Developer</h3>
+  <CodeBlock
+    code={`{
+  "defaultProfile": "node",
+  "directory": "~/dev",
+  "sort": "size"
+}`}
+    lang="json"
+    filename="~/.npkillrc"
+  />
+
+  <h3>Full-Stack Developer</h3>
+  <CodeBlock
+    code={`{
+  "sort": "size",
+  "profiles": {
+    "fullstack": {
+      "description": "Node + Python artifacts",
+      "targets": [
+        "node_modules",
+        ".next",
+        ".nuxt",
+        "dist",
+        "__pycache__",
+        ".venv",
+        ".pytest_cache"
+      ]
+    }
+  },
+  "defaultProfile": "fullstack"
+}`}
+    lang="json"
+    filename="~/.npkillrc"
+  />
+
+  <h3>Game Developer</h3>
+  <CodeBlock
+    code={`{
+  "directory": "~/GameProjects",
+  "profiles": {
+    "gamedev": {
+      "description": "Unity + Godot build artifacts",
+      "targets": [
+        "Library",
+        "Temp",
+        "Obj",
+        "Build",
+        ".godot",
+        ".import"
+      ]
+    }
+  },
+  "defaultProfile": "gamedev"
+}`}
+    lang="json"
+    filename="~/.npkillrc"
+  />
+
+  <h2>Validation</h2>
+  <p>
+    If your <code>.npkillrc</code> file contains invalid JSON or unknown options,
+    npkill will show a warning and continue with default settings.
+  </p>
+</DocLayout>
+
+<style>
+  .lead {
+    font-size: 1.15rem;
+    color: var(--color-text) !important;
+    margin-bottom: 2rem;
+  }
+
+  .warning {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    color: var(--color-text-muted);
+  }
+
+  .warning i {
+    font-size: 1.25rem;
+    color: var(--color-warning);
+    flex-shrink: 0;
+  }
+</style>
