@@ -6,7 +6,7 @@ const profiles = [
     id: "node",
     label: "node",
     arg: "node",
-    description: "Finds node_modules, bower_components...",
+    description: "Finds node_modules, .next, .angular...",
   },
   {
     id: "python",
@@ -21,10 +21,10 @@ const profiles = [
     description: "Finds target directories...",
   },
   {
-    id: "go",
-    label: "go",
-    arg: "go",
-    description: "Finds bin, pkg directories...",
+    id: "php",
+    label: "php",
+    arg: "php",
+    description: "Finds Composer vendor directories...",
   },
   {
     id: "java",
@@ -36,19 +36,19 @@ const profiles = [
     id: "unity",
     label: "unity",
     arg: "unity",
-    description: "Finds Library, Temp, Obj...",
+    description: "Finds the Library directory...",
   },
   {
     id: "godot",
     label: "godot",
     arg: "godot",
-    description: "Finds .import directory...",
+    description: "Finds .godot and .import directories...",
   },
   {
-    id: "flutter",
-    label: "flutter",
-    arg: "flutter",
-    description: "Finds build, .dart_tool...",
+    id: "dart",
+    label: "dart",
+    arg: "dart",
+    description: "Finds .dart_tool and build (Dart and Flutter)...",
   },
 ];
 ---
@@ -108,7 +108,8 @@ const profiles = [
 </section>
 
 <script>
-  const tags = document.querySelectorAll(".tag[data-profile]");
+  const tags =
+    document.querySelectorAll<HTMLButtonElement>(".tag[data-profile]");
   const commandText = document.getElementById("command-text");
   const commentText = document.getElementById("comment-text");
 
@@ -137,8 +138,9 @@ const profiles = [
     // Re-calculating description
     const desc =
       idsToShow.length === 1
-        ? document.querySelector(`.tag[data-profile="${idsToShow[0]}"]`)
-            ?.dataset.desc
+        ? document.querySelector<HTMLElement>(
+            `.tag[data-profile="${idsToShow[0]}"]`,
+          )?.dataset.desc
         : `Finds junk for ${idsToShow.join(", ")}...`;
 
     if (commandText)

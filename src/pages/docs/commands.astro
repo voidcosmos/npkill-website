@@ -15,104 +15,178 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
 
   <h2>Options Reference</h2>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Flag</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>-d, --directory &lt;path&gt;</code></td>
-        <td>Set the directory from which to begin searching</td>
-        <td><code>.</code> (current)</td>
-      </tr>
-      <tr>
-        <td><code>-f, --full</code></td>
-        <td>Start searching from the user's home directory</td>
-        <td><code>false</code></td>
-      </tr>
-      <tr>
-        <td><code>-p, --profile &lt;name&gt;</code></td>
-        <td
-          >Use a predefined profile (e.g., <code>node</code>, <code>python</code
-          >, <code>rust</code>)</td
-        >
-        <td><code>node</code></td>
-      </tr>
-      <tr>
-        <td><code>--targets &lt;dirs&gt;</code></td>
-        <td>Specify directory names to search for (comma-separated)</td>
-        <td><code>node_modules</code></td>
-      </tr>
-      <tr>
-        <td><code>-s, --sort &lt;type&gt;</code></td>
-        <td
-          >Sort results by: <code>size</code>, <code>path</code>, or <code
-            >last-mod</code
-          ></td
-        >
-        <td>none</td>
-      </tr>
-      <tr>
-        <td><code>-E, --exclude &lt;dirs&gt;</code></td>
-        <td>Exclude directories from search (comma-separated, in quotes)</td>
-        <td>—</td>
-      </tr>
-      <tr>
-        <td><code>-x, --exclude-hidden-directories</code></td>
-        <td>Exclude hidden directories (dot directories) from search</td>
-        <td><code>false</code></td>
-      </tr>
-      <tr>
-        <td><code>-D, --delete-all</code></td>
-        <td>Automatically delete all found directories (use with caution!)</td>
-        <td><code>false</code></td>
-      </tr>
-      <tr>
-        <td><code>--dry-run</code></td>
-        <td>Simulate deletion without actually deleting anything</td>
-        <td><code>false</code></td>
-      </tr>
-      <tr>
-        <td><code>-e, --show-errors</code></td>
-        <td>Show error messages if any occur</td>
-        <td><code>false</code></td>
-      </tr>
-      <tr>
-        <td><code>--size-unit &lt;unit&gt;</code></td>
-        <td>Force size display unit: <code>MB</code> or <code>GB</code></td>
-        <td>auto</td>
-      </tr>
-      <tr>
-        <td><code>-c, --config &lt;path&gt;</code></td>
-        <td>Path to custom .npkillrc config file</td>
-        <td><code>~/.npkillrc</code></td>
-      </tr>
-      <tr>
-        <td><code>--profiles</code></td>
-        <td>List all available profiles</td>
-        <td>—</td>
-      </tr>
-      <tr>
-        <td><code>-nu, --no-check-update</code></td>
-        <td>Don't check for updates on startup</td>
-        <td><code>false</code></td>
-      </tr>
-      <tr>
-        <td><code>-h, --help</code></td>
-        <td>Show help</td>
-        <td>—</td>
-      </tr>
-      <tr>
-        <td><code>-v, --version</code></td>
-        <td>Show npkill version</td>
-        <td>—</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Flag</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>-d, --directory &lt;path&gt;</code></td>
+          <td>Set the directory from which to begin searching</td>
+          <td><code>.</code> (current)</td>
+        </tr>
+        <tr>
+          <td><code>-f, --full</code></td>
+          <td>Start searching from the user's home directory</td>
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>-p, --profiles [names]</code></td>
+          <td
+            >Profiles to search with, separated by commas (e.g., <code
+              >-p python,java</code
+            >). <code>all</code> uses every profile. Without a value, lists the available
+            profiles</td
+          >
+          <td><code>node</code></td>
+        </tr>
+        <tr>
+          <td><code>-t, --targets &lt;names&gt;</code></td>
+          <td
+            >Search for these directory names instead of using profiles
+            (comma-separated). Can't be combined with <code>-p</code></td
+          >
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>-s, --sort &lt;type&gt;</code></td>
+          <td
+            >Sort results by: <code>size</code>, <code>path</code>, or <code
+              >age</code
+            ></td
+          >
+          <td>none</td>
+        </tr>
+        <tr>
+          <td><code>-E, --exclude &lt;patterns&gt;</code></td>
+          <td
+            >Skip matching directories and their contents (comma-separated). <code
+              >name</code
+            > matches at any depth, <code>./name</code> or <code
+              >parent/name</code
+            > from the scan root, <code>**/parent/name</code> at any depth, and an
+            absolute path matches exactly</td
+          >
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>-x, --exclude-sensitive</code></td>
+          <td
+            >Exclude sensitive results, like the dependencies some apps need to
+            run</td
+          >
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>--no-ignore-default</code></td>
+          <td
+            >Also look inside the folders skipped by default, like <code
+              >.git</code
+            > or <code>.nvm</code></td
+          >
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>--older-than &lt;days&gt;</code></td>
+          <td
+            >Only show results whose project has not been modified in more than
+            the given number of days</td
+          >
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>-D, --delete-all</code></td>
+          <td
+            >Automatically delete all found directories. Requires <code
+              >--targets</code
+            >. Add <code>-y</code> and <code>--json</code> or <code
+              >--json-stream</code
+            > to delete without the interface (use with caution!)</td
+          >
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>-y</code></td>
+          <td>Skip the warning shown by <code>--delete-all</code></td>
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>--dry-run</code></td>
+          <td>Simulate deletion without actually deleting anything</td>
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>-e, --hide-errors</code></td>
+          <td>Hide error messages</td>
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>--size-unit &lt;unit&gt;</code></td>
+          <td
+            >Size display unit: <code>auto</code>, <code>mb</code> or <code
+              >gb</code
+            >. With <code>auto</code>, sizes under 1024 MB are shown in MB and
+            larger ones in GB</td
+          >
+          <td><code>auto</code></td>
+        </tr>
+        <tr>
+          <td><code>--no-size</code></td>
+          <td
+            >Skip size calculation. Faster scans and deletions when you don't
+            need sizes</td
+          >
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>--no-age</code></td>
+          <td>Skip age (last modification time) calculation</td>
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>--no-stats</code></td>
+          <td
+            >Skip both size and age calculation. Same as <code
+              >--no-size --no-age</code
+            ></td
+          >
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>--json</code></td>
+          <td
+            >Print all results as a single JSON object at the end of the scan</td
+          >
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>--json-stream</code></td>
+          <td>Print each result as a JSON object on its own line</td>
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>--config &lt;path&gt;</code></td>
+          <td>Path to custom .npkillrc config file</td>
+          <td><code>./.npkillrc</code>, then <code>~/.npkillrc</code></td>
+        </tr>
+        <tr>
+          <td><code>-h, --help, ?</code></td>
+          <td>Show help</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>-v, --version</code></td>
+          <td>Show npkill version</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <h2 id="json">JSON Output Mode</h2>
   <p>npkill can output results as JSON for scripting and automation:</p>
@@ -126,10 +200,10 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
 
   <h3><code>--json-stream</code></h3>
   <p>
-    Prints each result as a separate JSON object on its own line as soon as it's
-    found. Useful for real-time processing or large scans.
+    Prints each result as a separate JSON object on its own line, as soon as its
+    size and age are ready. Useful for real-time processing or large scans.
   </p>
-  <CodeBlock code="npx npkill --json-stream | jq '.path'" />
+  <CodeBlock code="npx npkill --json-stream | jq -r '.result.path'" />
 
   <h2>Examples</h2>
 
@@ -152,91 +226,101 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
   <p>Once npkill is running, you can use these keyboard shortcuts:</p>
 
   <h3>Navigation</h3>
-  <table>
-    <tbody>
-      <tr>
-        <td><kbd>↑</kbd> / <kbd>k</kbd></td>
-        <td>Move up</td>
-      </tr>
-      <tr>
-        <td><kbd>↓</kbd> / <kbd>j</kbd></td>
-        <td>Move down</td>
-      </tr>
-      <tr>
-        <td><kbd>PgUp</kbd> / <kbd>Ctrl+u</kbd></td>
-        <td>Page up</td>
-      </tr>
-      <tr>
-        <td><kbd>PgDown</kbd> / <kbd>Ctrl+d</kbd></td>
-        <td>Page down</td>
-      </tr>
-      <tr>
-        <td><kbd>Home</kbd> / <kbd>End</kbd></td>
-        <td>Go to first/last result</td>
-      </tr>
-      <tr>
-        <td><kbd>←</kbd> / <kbd>h</kbd></td>
-        <td>Previous panel</td>
-      </tr>
-      <tr>
-        <td><kbd>→</kbd> / <kbd>l</kbd></td>
-        <td>Next panel (info panel)</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-scroll">
+    <table>
+      <tbody>
+        <tr>
+          <td><kbd>↑</kbd> / <kbd>k</kbd></td>
+          <td>Move up</td>
+        </tr>
+        <tr>
+          <td><kbd>↓</kbd> / <kbd>j</kbd></td>
+          <td>Move down</td>
+        </tr>
+        <tr>
+          <td><kbd>PgUp</kbd> / <kbd>u</kbd> / <kbd>Ctrl+u</kbd></td>
+          <td>Page up</td>
+        </tr>
+        <tr>
+          <td><kbd>PgDown</kbd> / <kbd>d</kbd> / <kbd>Ctrl+d</kbd></td>
+          <td>Page down</td>
+        </tr>
+        <tr>
+          <td><kbd>Home</kbd> / <kbd>End</kbd></td>
+          <td>Go to first/last result</td>
+        </tr>
+        <tr>
+          <td><kbd>←</kbd> / <kbd>h</kbd></td>
+          <td>Previous panel</td>
+        </tr>
+        <tr>
+          <td><kbd>→</kbd> / <kbd>l</kbd></td>
+          <td>Next panel (info panel)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <h3>Actions</h3>
-  <table>
-    <tbody>
-      <tr>
-        <td><kbd>Del</kbd> / <kbd>Backspace</kbd></td>
-        <td>Delete selected directory</td>
-      </tr>
-      <tr>
-        <td><kbd>o</kbd></td>
-        <td>Open parent directory in file explorer</td>
-      </tr>
-      <tr>
-        <td><kbd>/</kbd></td>
-        <td>Filter results (supports regex)</td>
-      </tr>
-      <tr>
-        <td><kbd>t</kbd></td>
-        <td>Toggle multiselect mode</td>
-      </tr>
-      <tr>
-        <td><kbd>q</kbd> / <kbd>Ctrl+c</kbd></td>
-        <td>Quit</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-scroll">
+    <table>
+      <tbody>
+        <tr>
+          <td><kbd>Space</kbd> / <kbd>Del</kbd></td>
+          <td>Delete selected directory</td>
+        </tr>
+        <tr>
+          <td><kbd>o</kbd></td>
+          <td>Open parent directory in file explorer</td>
+        </tr>
+        <tr>
+          <td><kbd>/</kbd></td>
+          <td>Filter results (supports regex)</td>
+        </tr>
+        <tr>
+          <td><kbd>t</kbd></td>
+          <td>Toggle multiselect mode</td>
+        </tr>
+        <tr>
+          <td><kbd>e</kbd></td>
+          <td>Show errors</td>
+        </tr>
+        <tr>
+          <td><kbd>q</kbd> / <kbd>Ctrl+c</kbd></td>
+          <td>Quit</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <h3>Multiselect Mode</h3>
   <p>Press <kbd>t</kbd> to enter multiselect mode:</p>
-  <table>
-    <tbody>
-      <tr>
-        <td><kbd>Space</kbd></td>
-        <td>Select/deselect current item</td>
-      </tr>
-      <tr>
-        <td><kbd>Enter</kbd></td>
-        <td>Delete all selected items</td>
-      </tr>
-      <tr>
-        <td><kbd>a</kbd></td>
-        <td>Select/deselect all</td>
-      </tr>
-      <tr>
-        <td><kbd>v</kbd></td>
-        <td>Select a range</td>
-      </tr>
-      <tr>
-        <td><kbd>t</kbd></td>
-        <td>Exit multiselect without deleting</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-scroll">
+    <table>
+      <tbody>
+        <tr>
+          <td><kbd>Space</kbd></td>
+          <td>Select/deselect current item</td>
+        </tr>
+        <tr>
+          <td><kbd>Enter</kbd></td>
+          <td>Delete all selected items</td>
+        </tr>
+        <tr>
+          <td><kbd>a</kbd></td>
+          <td>Select/deselect all</td>
+        </tr>
+        <tr>
+          <td><kbd>v</kbd></td>
+          <td>Select a range</td>
+        </tr>
+        <tr>
+          <td><kbd>t</kbd></td>
+          <td>Exit multiselect without deleting</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </DocLayout>
 
 <style>

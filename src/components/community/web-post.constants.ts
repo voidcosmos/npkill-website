@@ -29,8 +29,7 @@ export const Posts: WebPost[] = [
     date: new Date("2021-08-15"),
     source:
       "https://www.makeuseof.com/how-to-delete-unwanted-node-modules-folder-with-npkill/",
-    favicon:
-      "https://www.makeuseof.com/public/build/images/favicon-48x48.fb40876e.png",
+    favicon: "https://www.makeuseof.com/public/build/images/favicon-48x48.png",
   },
   {
     title: "npkill - The solution to deleting node_modules easily, with style",

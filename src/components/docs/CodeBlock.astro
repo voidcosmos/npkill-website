@@ -80,8 +80,15 @@ const id = `code-${Math.random().toString(36).slice(2, 9)}`;
     transition: all 0.2s;
   }
 
-  .code-container:hover .copy-btn {
+  .code-container:hover .copy-btn,
+  .code-container:focus-within .copy-btn {
     opacity: 1;
+  }
+
+  @media (hover: none) {
+    .copy-btn {
+      opacity: 1;
+    }
   }
 
   .copy-btn:hover {

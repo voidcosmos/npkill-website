@@ -44,7 +44,7 @@ export const Tweets: Tweet[] = [
     name: "Carlos Azaustre",
     text: "Esto es una maravilla:\n$ npx npkill\n\nSelecciona y borra los node_modules de los proyectos de tu equipo que elijas 🧹\n\nY es made in Spain 💪",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1778453331800670209/YFlPVTAJ_normal.jpg",
+      "https://pbs.twimg.com/profile_images/2101967014457737216/G5ge-Zi-_normal.jpg",
     date: new Date("2020-08-15"),
     mediaSrc:
       "https://pbs.twimg.com/media/EkZO-XLX0AMzb6h?format=jpg&name=small",
@@ -64,7 +64,7 @@ export const Tweets: Tweet[] = [
     name: "Álvaro A. Quirós",
     text: "Ei #javascript & #npm friends! you should try #npkill ;)\nI just freed up 26GB of memory from my unused node_modules! From @Carlillo, @NyaBlk & @juaniman99 thanks guys! 🍻 ",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1633764401986654208/PR1jiJhy_normal.jpg",
+      "https://pbs.twimg.com/profile_images/1872262951316418560/TCzSARK8_normal.jpg",
     date: new Date("2019-08-19"),
     mediaSrc:
       "https://pbs.twimg.com/media/ECUjbe2XYAAQk01?format=jpg&name=small",
@@ -79,28 +79,10 @@ export const Tweets: Tweet[] = [
     source: "https://twitter.com/AlbertoBasalo/status/1179004287717969920",
   },
   {
-    name: "Naftali Murgor",
-    text: "npkill removes unused node_modules systemwide ",
-    profileImg:
-      "https://pbs.twimg.com/profile_images/1624660183073841152/N2PFjQro_normal.jpg",
-    date: new Date("2023-08-22"),
-    mediaSrc:
-      "https://pbs.twimg.com/media/F9B-3MJXUAIGjnw?format=jpg&name=900x900",
-    source: "https://twitter.com/nkmurgor/status/1716010953047716161",
-  },
-  {
-    name: "Lang",
-    text: "npkill for the savior 👌",
-    profileImg:
-      "https://pbs.twimg.com/profile_images/1778231768140898304/-_aw93BK_normal.jpg",
-    date: new Date("2024-04-16"),
-    source: "https://twitter.com/mgilangjanuar/status/1780099882197680517",
-  },
-  {
     name: "unpunnyfuns",
     text: "`npx npkill` is probably my fourth most used command at this stage.",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1612832351377047553/zvh_GKw4_normal.jpg",
+      "https://pbs.twimg.com/profile_images/1792995059480055809/tMDWFyEE_normal.jpg",
     date: new Date("2024-04-12"),
     source: "https://twitter.com/unpunnyfuns/status/1778794468394848383",
   },
@@ -108,7 +90,7 @@ export const Tweets: Tweet[] = [
     name: "~~~",
     text: "holy just freed up 5 gb of space by uninstallin node_modules with ´pnpx npkill´ 💀",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1723417205100937216/zQguaw7E_normal.jpg",
+      "https://pbs.twimg.com/profile_images/2022458951481040899/Ix6QBC8y_normal.jpg",
     date: new Date("2024-04-08"),
     source: "https://twitter.com/Skuiggly/status/1777124827146424323",
   },
@@ -116,7 +98,7 @@ export const Tweets: Tweet[] = [
     name: "RaZaan",
     text: "Weekend cleanup\n- Deleted ~13.45 GB of node_modules using `npx npkill`\n- Deleted mysql error log file ~13 GB",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1767965618685489154/Tw9Q3Dea_normal.jpg",
+      "https://pbs.twimg.com/profile_images/1998651994278346752/XAhLWTJy_normal.jpg",
     date: new Date("2024-04-06"),
     source: "https://twitter.com/razaanstha/status/1776468165955883409",
   },
@@ -132,7 +114,7 @@ export const Tweets: Tweet[] = [
     name: "Ahmad Awais",
     text: "🤯 Free up GBs of node_modules in less than 30 secs.\n\n❯❯ $ npx npkill\n\nI've deleted 50 GB+ so far. #OneDevMinute",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1436384085157371906/XL60VTpr_normal.jpg",
+      "https://pbs.twimg.com/profile_images/2119893417430011904/VDalkMGK_normal.jpg",
     date: new Date("2020-10-15"),
     mediaSrc:
       "https://pbs.twimg.com/media/EkWJeW6WkAEsoep?format=jpg&name=small",
@@ -142,7 +124,7 @@ export const Tweets: Tweet[] = [
     name: "Gregor Zunic",
     text: "Friendly daily reminder to\n\n$ npx npkill",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1635379786854936582/jto_w58g_normal.jpg",
+      "https://pbs.twimg.com/profile_images/1980037752797175809/cTfw6IDz_normal.jpg",
     date: new Date("2023-09-27"),
     mediaSrc:
       "https://pbs.twimg.com/media/F7BRufJXAAAoFxk?format=png&name=small",
@@ -152,7 +134,7 @@ export const Tweets: Tweet[] = [
     name: "Midudev",
     text: "TRUCAZO para liberar GIGAS de Disco Duro.\nSi eres programador y usas NPM...\n\nEjecuta el comando: npx npkill\n\nTe muestra las carpetas node_modules y sus tamaños.\nDale [Espacio] para eliminar las que ya no uses ↓ ",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1613612257015128065/oA0Is67J_normal.jpg",
+      "https://pbs.twimg.com/profile_images/1824773087323111424/-S3LUmjQ_normal.jpg",
     date: new Date("2023-12-23"),
     mediaSrc:
       "https://pbs.twimg.com/ext_tw_video_thumb/1738564065939664896/pu/img/9gwRsumeVJETWa_X.jpg",
@@ -162,7 +144,7 @@ export const Tweets: Tweet[] = [
     name: "Jess",
     text: "😵‍💫🗑 Just deleted well over 100GB of node_modules using `npx npkill`.",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1725706546871521281/R2YP3yfw_normal.jpg",
+      "https://pbs.twimg.com/profile_images/1969826920461131776/hTGE4SkF_normal.jpg",
     date: new Date("2022-08-01"),
     source: "https://twitter.com/_jessicasachs/status/1553934154718486528",
   },
@@ -188,7 +170,7 @@ export const Tweets: Tweet[] = [
     name: "Anish",
     text: "Never thought i'd use npkill ever, but the node modules were making a hole in my ssd. Switching to pnpm (where files inside node modules are cloned or hard linked from a single content-addressable storage) 🔥.\n#npm #webdevelopment #nodejs #SoftwareDevelopment #javascript #reactjs",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1719261951711444992/eKTyhITF_normal.jpg",
+      "https://pbs.twimg.com/profile_images/2042152302585507842/2i6-nJZz_normal.jpg",
     date: new Date("2024-03-12"),
     mediaSrc:
       "https://pbs.twimg.com/media/GIf4CYbbQAAgdmv?format=jpg&name=small",
@@ -206,7 +188,7 @@ export const Tweets: Tweet[] = [
     name: "Warp",
     text: "When you get a bit too ambitious with your side projects, you end up having GB worth of node_modules.\n\nnpkill will find and remove old node_modules folders for you.",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1511227283444539395/JFY5O8ik_normal.png",
+      "https://pbs.twimg.com/profile_images/2089744783694606336/p0K5KSLo_normal.jpg",
     date: new Date("2024-04-11"),
     mediaSrc:
       "https://pbs.twimg.com/ext_tw_video_thumb/1767245355219906560/pu/img/NBg4XqrhksqIYz1v.jpg",
@@ -216,7 +198,7 @@ export const Tweets: Tweet[] = [
     name: "Gambhir",
     text: "How much space does all your node_module takes? \n\nCheck by using `npkill`",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1538994364306927619/XqRt6JWT_normal.jpg",
+      "https://pbs.twimg.com/profile_images/1841840712276393984/d6q4iGph_normal.jpg",
     date: new Date("2024-03-08"),
     mediaSrc:
       "https://pbs.twimg.com/media/GIJ3KidakAASekL?format=jpg&name=small",
@@ -233,20 +215,10 @@ export const Tweets: Tweet[] = [
     source: "https://twitter.com/codingmickey/status/1753384732770082967",
   },
   {
-    name: "Mehdi",
-    text: 'I saved over 200GB with this package! 🎉\n\n"npkill" is a fantastic tool that displays all the `node_modules` in your system and allows you to remove selected ones.\n\nYou have no idea how many projects are taking up space unnecessarily😅',
-    profileImg:
-      "https://pbs.twimg.com/profile_images/1746270538966728705/wPAlSqZM_normal.png",
-    date: new Date("2024-02-06"),
-    mediaSrc:
-      "https://pbs.twimg.com/media/GFpvVULbEAESTkl?format=jpg&name=small",
-    source: "https://twitter.com/stoitec/status/1754837426487566625",
-  },
-  {
     name: "Myk.eth",
     text: "Freeing up 34.45 GB with npkill 🙃",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1750940863117541376/8CrbZQqh_normal.jpg",
+      "https://pbs.twimg.com/profile_images/2006868942283821056/jedq9boq_normal.jpg",
     date: new Date("2024-01-16"),
     mediaSrc:
       "https://pbs.twimg.com/media/GD-GJQFbAAAhME_?format=jpg&name=small",
@@ -256,7 +228,7 @@ export const Tweets: Tweet[] = [
     name: "Xavier0x35e81",
     text: "`npkill` should get a nobel prize!\n\nDevelopers need easy-to-use tools like this.\n\n@NyaBlk, @imzaldih, huge thanks for creating it!",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1720726918734254081/sf1xU__Y_normal.jpg",
+      "https://pbs.twimg.com/profile_images/1907637492800708608/tVvPrshr_normal.jpg",
     date: new Date("2023-12-05"),
     source: "https://twitter.com/Xavier0x35e81/status/1731933779931848990",
   },
@@ -274,7 +246,7 @@ export const Tweets: Tweet[] = [
     name: "Boidu",
     text: "Holy shit this is a game changer",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1567754149701496832/t8nsBjmx_normal.jpg",
+      "https://pbs.twimg.com/profile_images/2003904158823583744/Z230ZOc8_normal.jpg",
     date: new Date("2023-09-26"),
     mediaSrc:
       "https://pbs.twimg.com/media/F6-i3tobEAAEq40?format=jpg&name=small",
@@ -284,7 +256,7 @@ export const Tweets: Tweet[] = [
     name: "Bonnie Simon",
     text: "I just saved over 25gigs of space with npkill.  Wow",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1763978969429458944/svWFtOAb_normal.jpg",
+      "https://pbs.twimg.com/profile_images/2084206523610464256/co-VA1m7_normal.jpg",
     date: new Date("2023-07-04"),
     mediaSrc:
       "https://pbs.twimg.com/media/F0Mzag_aIAA4NrY?format=png&name=360x360",
@@ -293,7 +265,8 @@ export const Tweets: Tweet[] = [
   {
     name: "Shashank Agrawal",
     text: "The benefit of keeping all the #Nodejs based projects in one directory so that you can clean up node_modules in one go using #npkill\n\nThanks, @NyaBlk & @juaniman99 for this wonderful library!\n\nSaved 10.59 GB 🎉🥳",
-    profileImg: "",
+    profileImg:
+      "https://pbs.twimg.com/profile_images/1842893686574891008/3kH9w66S_normal.jpg",
     date: new Date("2020-06-09"),
     mediaSrc:
       "https://pbs.twimg.com/media/EcgtfrqUwAABQ3U?format=jpg&name=small",
@@ -313,14 +286,14 @@ export const Tweets: Tweet[] = [
     name: "Kevin B. Ridgway",
     text: "node_modules got you down? :) Try this CLI!\n\nnpx npkill\n\nIt goes through a directory of projects and finds all your node_modules directories and allows you to select which one to delete.\n\nThank me later.\n\nI had 21GB of node_modules I could delete!",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1783112828238340096/F47D2_sR_normal.jpg",
+      "https://pbs.twimg.com/profile_images/2044073271398936576/E7mwtaa__normal.jpg",
     date: new Date("2024-06-09"),
     mediaSrc:
       "https://pbs.twimg.com/media/GPo0Gi1agAAU296?format=png&name=900x900",
     source: "https://x.com/program247365/status/1799808292065329220",
   },
   {
-    name: "https://x.com/hemanthg4/status/1799711313209463212",
+    name: "Hemanth G 👨🏻‍💻",
     text: "PSA to run your half yearly clean up. I just recovered ~150 GB on my Mac.\n\n1. docker system prune -a -f --volumes\n2. npx npkill",
     profileImg:
       "https://pbs.twimg.com/profile_images/1495504398411509760/Kru-OxJc_normal.jpg",
@@ -328,10 +301,10 @@ export const Tweets: Tweet[] = [
     source: "https://x.com/hemanthg4/status/1799711313209463212",
   },
   {
-    name: "https://x.com/wesleycoder/status/1798826832529412239",
+    name: "wés",
     text: "Yeah... `npkill` saves lives",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1780776232935710720/FkbFotpc_normal.jpg",
+      "https://pbs.twimg.com/profile_images/1817341352629207041/AqToc8VD_normal.jpg",
     date: new Date("2024-06-06"),
     source: "https://x.com/wesleycoder/status/1798826832529412239",
   },
@@ -348,7 +321,7 @@ export const Tweets: Tweet[] = [
     name: "Alex Streza",
     text: "Just run 'npx npkill'.\n\nThank me later.",
     profileImg:
-      "https://pbs.twimg.com/profile_images/1665683657971867648/qAofOJp8_normal.jpg",
+      "https://pbs.twimg.com/profile_images/1970023393626890240/wIbfGPeE_normal.jpg",
     date: new Date("2024-05-06"),
     mediaSrc:
       "https://pbs.twimg.com/media/GM4lMEqa4AAu69i?format=jpg&name=small",

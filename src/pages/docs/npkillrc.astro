@@ -16,11 +16,17 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
 
   <h2>File Location</h2>
   <p>
-    By default, npkill looks for <code>~/.npkillrc</code> in your home directory.
-    You can also specify a custom config file with the <code>-c</code> flag:
+    npkill looks for the configuration file in this order and uses the first one
+    it finds:
   </p>
 
-  <CodeBlock code="npx npkill -c /path/to/my-config.json" />
+  <ol>
+    <li>The path given with the <code>--config</code> flag</li>
+    <li><code>./.npkillrc</code> in the current directory</li>
+    <li><code>~/.npkillrc</code> in your home directory</li>
+  </ol>
+
+  <CodeBlock code="npx npkill --config /path/to/my-config.json" />
 
   <h2>Configuration Options</h2>
   <p>
@@ -29,12 +35,13 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
 
   <CodeBlock
     code={`{
-  "defaultProfile": "node",
-  "directory": "~/projects",
-  "sort": "size",
-  "excludeHiddenDirectories": false,
-  "showErrors": false,
-  "noCheckUpdate": false,
+  "rootDir": "/home/user/projects",
+  "exclude": ["important-project", "production-app"],
+  "sortBy": "size",
+  "sizeUnit": "auto",
+  "excludeSensitiveResults": true,
+  "dryRun": false,
+  "defaultProfiles": ["node", "webdev"],
   "profiles": {
     "webdev": {
       "description": "Frontend artifacts and build outputs",
@@ -47,67 +54,76 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
   />
 
   <h3>Available Options</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Option</th>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>defaultProfile</code></td>
-        <td>string</td>
-        <td>Profile to use by default (e.g., "node", "python")</td>
-      </tr>
-      <tr>
-        <td><code>directory</code></td>
-        <td>string</td>
-        <td>Default directory to start searching from</td>
-      </tr>
-      <tr>
-        <td><code>targets</code></td>
-        <td>string[]</td>
-        <td>Default target directories to search for</td>
-      </tr>
-      <tr>
-        <td><code>sort</code></td>
-        <td>string</td>
-        <td>Default sort order: "size", "path", or "last-mod"</td>
-      </tr>
-      <tr>
-        <td><code>exclude</code></td>
-        <td>string[]</td>
-        <td>Directories to always exclude from search</td>
-      </tr>
-      <tr>
-        <td><code>excludeHiddenDirectories</code></td>
-        <td>boolean</td>
-        <td>Whether to exclude hidden (dot) directories</td>
-      </tr>
-      <tr>
-        <td><code>showErrors</code></td>
-        <td>boolean</td>
-        <td>Whether to display error messages</td>
-      </tr>
-      <tr>
-        <td><code>noCheckUpdate</code></td>
-        <td>boolean</td>
-        <td>Disable update checks on startup</td>
-      </tr>
-      <tr>
-        <td><code>profiles</code></td>
-        <td>object</td>
-        <td>Custom profile definitions</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>rootDir</code></td>
+          <td>string</td>
+          <td
+            >Absolute path to start searching from. <code>~</code> is not expanded</td
+          >
+        </tr>
+        <tr>
+          <td><code>exclude</code></td>
+          <td>string[]</td>
+          <td
+            >Directories to skip, with the same patterns as <code>-E</code>.
+            They are added to the ones given with <code>-E</code></td
+          >
+        </tr>
+        <tr>
+          <td><code>sortBy</code></td>
+          <td>string</td>
+          <td
+            >Default sort order: "none", "size", "path" or "age". Default "none"</td
+          >
+        </tr>
+        <tr>
+          <td><code>sizeUnit</code></td>
+          <td>string</td>
+          <td>Size display unit: "auto", "mb" or "gb". Default "auto"</td>
+        </tr>
+        <tr>
+          <td><code>excludeSensitiveResults</code></td>
+          <td>boolean</td>
+          <td>Whether to hide sensitive results. Default false</td>
+        </tr>
+        <tr>
+          <td><code>dryRun</code></td>
+          <td>boolean</td>
+          <td>Simulate deletions without deleting anything. Default false</td>
+        </tr>
+        <tr>
+          <td><code>defaultProfiles</code></td>
+          <td>string[]</td>
+          <td
+            >Profiles to use when you don't pass <code>-p</code> or <code
+              >-t</code
+            >. Built-in or your own, never empty. Default ["node"]</td
+          >
+        </tr>
+        <tr>
+          <td><code>profiles</code></td>
+          <td>object</td>
+          <td>Custom profile definitions</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <h2>Custom Profiles</h2>
   <p>
     You can define your own profiles in the <code>profiles</code> section. Each profile
-    needs a name, description, and list of targets:
+    needs a name, description, and list of targets. A target is a folder name or
+    a <a href="/docs/profiles#custom-rules">rule</a>:
   </p>
 
   <CodeBlock
@@ -138,7 +154,7 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
     <i class="bx bx-error"></i>
     <div>
       Custom profiles with the same name as built-in profiles will override
-      them.
+      them. <code>all</code> is reserved.
     </div>
   </div>
 
@@ -165,9 +181,9 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
   <h3>JavaScript Developer</h3>
   <CodeBlock
     code={`{
-  "defaultProfile": "node",
-  "directory": "~/dev",
-  "sort": "size"
+  "defaultProfiles": ["node"],
+  "rootDir": "/home/user/dev",
+  "sortBy": "size"
 }`}
     lang="json"
     filename="~/.npkillrc"
@@ -176,22 +192,8 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
   <h3>Full-Stack Developer</h3>
   <CodeBlock
     code={`{
-  "sort": "size",
-  "profiles": {
-    "fullstack": {
-      "description": "Node + Python artifacts",
-      "targets": [
-        "node_modules",
-        ".next",
-        ".nuxt",
-        "dist",
-        "__pycache__",
-        ".venv",
-        ".pytest_cache"
-      ]
-    }
-  },
-  "defaultProfile": "fullstack"
+  "sortBy": "size",
+  "defaultProfiles": ["node", "python"]
 }`}
     lang="json"
     filename="~/.npkillrc"
@@ -200,21 +202,8 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
   <h3>Game Developer</h3>
   <CodeBlock
     code={`{
-  "directory": "~/GameProjects",
-  "profiles": {
-    "gamedev": {
-      "description": "Unity + Godot build artifacts",
-      "targets": [
-        "Library",
-        "Temp",
-        "Obj",
-        "Build",
-        ".godot",
-        ".import"
-      ]
-    }
-  },
-  "defaultProfile": "gamedev"
+  "rootDir": "/home/user/GameProjects",
+  "defaultProfiles": ["unity", "unreal", "godot"]
 }`}
     lang="json"
     filename="~/.npkillrc"
@@ -222,8 +211,10 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
 
   <h2>Validation</h2>
   <p>
-    If your <code>.npkillrc</code> file contains invalid JSON or unknown options,
-    npkill will show a warning and continue with default settings.
+    npkill checks the file every time it starts: unknown properties, types and
+    values. If something is wrong, it shows a configuration error with the
+    reason and exits without scanning. A missing <code>~/.npkillrc</code> is fine,
+    but a file passed with <code>--config</code> must exist.
   </p>
 </DocLayout>
 

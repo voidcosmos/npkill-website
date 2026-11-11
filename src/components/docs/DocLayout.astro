@@ -48,7 +48,12 @@ function isActive(href: string): boolean {
         </nav>
 
         <div class="sidebar-footer">
-          <a href="/changelog" class="sidebar-link changelog-link">
+          <a
+            href="https://github.com/voidcosmos/npkill/releases/tag/v1.0.0"
+            target="_blank"
+            rel="noopener"
+            class="sidebar-link changelog-link"
+          >
             <i class="bx bx-news"></i>
             What's new in 1.0
           </a>
@@ -191,6 +196,10 @@ function isActive(href: string): boolean {
 
   .doc-article :global(li) {
     margin-bottom: 0.5rem;
+  }
+
+  .doc-article :global(.table-scroll) {
+    overflow-x: auto;
   }
 
   .doc-article :global(table) {
