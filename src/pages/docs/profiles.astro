@@ -1,0 +1,443 @@
+---
+import DocLayout from "../../components/docs/DocLayout.astro";
+import CodeBlock from "../../components/docs/CodeBlock.astro";
+import ImagePlaceholder from "../../components/docs/ImagePlaceholder.astro";
+---
+
+<DocLayout
+  title="Profiles"
+  description="Learn how to use npkill profiles to clean up more than just node_modules - Python, Rust, Godot, and more."
+>
+  <h1>Profiles</h1>
+  <p class="lead">
+    Profiles are one of the biggest features in npkill 1.0. They let you clean
+    up much more than just <code>node_modules</code> — think Python virtual environments,
+    Rust build artifacts, game engine caches, and more.
+  </p>
+
+  <h2>What are Profiles?</h2>
+  <p>
+    A profile is a collection of target directories that belong together.
+    Instead of specifying individual targets, you can use a profile to search
+    for all related directories at once.
+  </p>
+  <p>
+    For example, the <code>node</code> profile includes not just <code
+      >node_modules</code
+    >, but also <code>.next</code>, <code>.nx</code>, <code>.angular</code>, <code
+      >.turbo</code
+    >, and other heavy directories commonly found in Node.js projects.
+  </p>
+  <p>
+    Some folders are found by name alone. Others only count when the files that
+    identify their project are around them. For example, <code>target</code> is only
+    shown next to a <code>Cargo.toml</code>, <code>pom.xml</code> or <code
+      >build.sbt</code
+    >.
+  </p>
+
+  <h2>Using Profiles</h2>
+  <p>Use the <code>-p</code> or <code>--profiles</code> flag:</p>
+
+  <CodeBlock code="npx npkill -p python" />
+
+  <p>Separate several profiles with commas:</p>
+
+  <CodeBlock code="npx npkill -p node,python" />
+
+  <p>
+    By default, npkill uses the <code>node</code> profile. <code>all</code> combines
+    every built-in profile, including your overrides of them.
+  </p>
+
+  <h2>Available Profiles</h2>
+  <p>
+    npkill 1.0 ships with 20 built-in profiles. Run <code
+      >npkill --profiles</code
+    > to see all of them.
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Profile</th>
+          <th>Targets</th>
+          <th>Found when</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>node</code></td>
+          <td><code>node_modules</code>, <code>.angular</code></td>
+          <td>Always</td>
+        </tr>
+        <tr>
+          <td><code>node</code></td>
+          <td
+            ><code>.next</code>, <code>.nuxt</code>, <code>.svelte-kit</code>, <code
+              >.parcel-cache</code
+            ></td
+          >
+          <td>Next to <code>package.json</code></td>
+        </tr>
+        <tr>
+          <td><code>node</code></td>
+          <td><code>.nx</code></td>
+          <td>Next to <code>nx.json</code></td>
+        </tr>
+        <tr>
+          <td><code>node</code></td>
+          <td><code>.output</code></td>
+          <td>Contains <code>nitro.json</code></td>
+        </tr>
+        <tr>
+          <td><code>node</code></td>
+          <td><code>.vite</code></td>
+          <td>Contains <code>deps</code></td>
+        </tr>
+        <tr>
+          <td><code>node</code></td>
+          <td><code>.turbo</code></td>
+          <td>Next to <code>turbo.json</code> or <code>turbo.jsonc</code></td>
+        </tr>
+        <tr>
+          <td><code>node</code></td>
+          <td><code>storybook-static</code></td>
+          <td
+            >Next to <code>package.json</code> and <code>.storybook</code>,
+            contains <code>index.html</code> and <code>iframe.html</code></td
+          >
+        </tr>
+        <tr>
+          <td><code>node</code></td>
+          <td><code>.docusaurus</code></td>
+          <td>Contains <code>DONT-EDIT-THIS-FOLDER</code></td>
+        </tr>
+        <tr>
+          <td><code>node</code></td>
+          <td><code>coverage</code></td>
+          <td
+            >Contains <code>coverage-final.json</code>, <code>lcov.info</code> or
+            <code>clover.xml</code></td
+          >
+        </tr>
+        <tr>
+          <td><code>python</code></td>
+          <td><code>__pycache__</code></td>
+          <td>Always</td>
+        </tr>
+        <tr>
+          <td><code>python</code></td>
+          <td
+            ><code>.pytest_cache</code>, <code>.mypy_cache</code>, <code
+              >.ruff_cache</code
+            ></td
+          >
+          <td>Contains <code>CACHEDIR.TAG</code></td>
+        </tr>
+        <tr>
+          <td><code>python</code></td>
+          <td><code>.tox</code></td>
+          <td
+            >Next to <code>tox.ini</code>, <code>tox.toml</code>, <code
+              >pyproject.toml</code
+            > or <code>setup.cfg</code></td
+          >
+        </tr>
+        <tr>
+          <td><code>python</code></td>
+          <td><code>.nox</code></td>
+          <td>Next to <code>noxfile.py</code></td>
+        </tr>
+        <tr>
+          <td><code>python</code></td>
+          <td><code>.venv</code>, <code>venv</code>, <code>env</code></td>
+          <td>Contains <code>pyvenv.cfg</code></td>
+        </tr>
+        <tr>
+          <td><code>java</code></td>
+          <td><code>target</code></td>
+          <td>Next to <code>pom.xml</code></td>
+        </tr>
+        <tr>
+          <td><code>java</code></td>
+          <td><code>build</code></td>
+          <td
+            >Next to <code>build.gradle</code> or <code>build.gradle.kts</code
+            ></td
+          >
+        </tr>
+        <tr>
+          <td><code>java</code></td>
+          <td><code>.gradle</code></td>
+          <td
+            >Next to <code>settings.gradle</code>, <code
+              >settings.gradle.kts</code
+            >, <code>build.gradle</code> or <code>build.gradle.kts</code></td
+          >
+        </tr>
+        <tr>
+          <td><code>android</code></td>
+          <td><code>build</code>, <code>.cxx</code></td>
+          <td
+            >Next to <code>build.gradle</code> or <code>build.gradle.kts</code
+            ></td
+          >
+        </tr>
+        <tr>
+          <td><code>dotnet</code></td>
+          <td><code>obj</code></td>
+          <td>Contains <code>project.assets.json</code></td>
+        </tr>
+        <tr>
+          <td><code>rust</code></td>
+          <td><code>target</code></td>
+          <td>Next to <code>Cargo.toml</code></td>
+        </tr>
+        <tr>
+          <td><code>elixir</code></td>
+          <td><code>_build</code>, <code>deps</code></td>
+          <td>Next to <code>mix.exs</code></td>
+        </tr>
+        <tr>
+          <td><code>elixir</code></td>
+          <td><code>.elixir_ls</code></td>
+          <td>Always</td>
+        </tr>
+        <tr>
+          <td><code>haskell</code></td>
+          <td><code>dist-newstyle</code></td>
+          <td>Contains <code>cache</code></td>
+        </tr>
+        <tr>
+          <td><code>haskell</code></td>
+          <td><code>.stack-work</code></td>
+          <td>Always</td>
+        </tr>
+        <tr>
+          <td><code>scala</code></td>
+          <td><code>target</code></td>
+          <td
+            >Next to <code>build.sbt</code> or <code>build.properties</code></td
+          >
+        </tr>
+        <tr>
+          <td><code>scala</code></td>
+          <td><code>.bloop</code>, <code>.metals</code></td>
+          <td>Next to <code>build.sbt</code></td>
+        </tr>
+        <tr>
+          <td><code>cpp</code></td>
+          <td><code>CMakeFiles</code></td>
+          <td
+            >Next to <code>CMakeCache.txt</code> or <code
+              >cmake_install.cmake</code
+            ></td
+          >
+        </tr>
+        <tr>
+          <td><code>cpp</code></td>
+          <td
+            ><code>cmake-build-debug</code>, <code>cmake-build-release</code
+            ></td
+          >
+          <td>Contains <code>CMakeCache.txt</code></td>
+        </tr>
+        <tr>
+          <td><code>unity</code></td>
+          <td><code>Library</code></td>
+          <td
+            >Next to <code>Assets</code> and <code>ProjectSettings</code>. Unity
+            reimports every asset afterwards</td
+          >
+        </tr>
+        <tr>
+          <td><code>unreal</code></td>
+          <td><code>Intermediate</code>, <code>DerivedDataCache</code></td>
+          <td>Next to <code>Config</code> and <code>Content</code></td>
+        </tr>
+        <tr>
+          <td><code>godot</code></td>
+          <td><code>.import</code>, <code>.godot</code></td>
+          <td
+            >Next to <code>project.godot</code>. Includes local editor state and
+            export credentials</td
+          >
+        </tr>
+        <tr>
+          <td><code>clojure</code></td>
+          <td><code>.cpcache</code></td>
+          <td>Next to <code>deps.edn</code></td>
+        </tr>
+        <tr>
+          <td><code>elm</code></td>
+          <td><code>elm-stuff</code></td>
+          <td>Next to <code>elm.json</code></td>
+        </tr>
+        <tr>
+          <td><code>php</code></td>
+          <td><code>vendor</code></td>
+          <td
+            >Next to <code>composer.json</code>, contains <code
+              >autoload.php</code
+            ></td
+          >
+        </tr>
+        <tr>
+          <td><code>dart</code></td>
+          <td><code>.dart_tool</code>, <code>build</code></td>
+          <td>Next to <code>pubspec.yaml</code></td>
+        </tr>
+        <tr>
+          <td><code>swift</code></td>
+          <td><code>.build</code></td>
+          <td>Next to <code>Package.swift</code></td>
+        </tr>
+        <tr>
+          <td><code>zig</code></td>
+          <td
+            ><code>.zig-cache</code>, <code>zig-cache</code>, <code
+              >zig-out</code
+            ></td
+          >
+          <td>Next to <code>build.zig</code></td>
+        </tr>
+        <tr>
+          <td><code>terraform</code></td>
+          <td><code>.terraform</code></td>
+          <td
+            >Next to <code>.terraform.lock.hcl</code>. The selected workspace
+            goes back to <code>default</code></td
+          >
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ImagePlaceholder
+    src="/img/profiles-result-counter.png"
+    alt="npkill header with the result counter for the node profile"
+    description="The result counter shows which profiles are active and how many items were found for each target type."
+  />
+
+  <h2>Profiles and Custom Targets</h2>
+  <p>
+    <code>--targets</code> searches only for the names you give and turns profiles
+    off. It can't be combined with <code>-p</code>. To search for extra folders
+    together with a profile, create your own profile in <a href="/docs/npkillrc"
+      >.npkillrc</a
+    >.
+  </p>
+
+  <CodeBlock code='npx npkill --targets ".tmp,coverage"' />
+
+  <h2>Custom Profiles</h2>
+  <p>
+    You can create your own profiles in the <a href="/docs/npkillrc"
+      >.npkillrc</a
+    > configuration file:
+  </p>
+
+  <CodeBlock
+    code={`{
+  "profiles": {
+    "webdev": {
+      "description": "Frontend web development artifacts",
+      "targets": ["dist", ".next", ".nuxt", ".output"]
+    },
+    "mystack": {
+      "description": "Full-stack project artifacts (JS/Python/Java)",
+      "targets": ["venv", ".venv", "target", "__pycache__", ".gradle"]
+    },
+    "mobile": {
+      "description": "Mobile platform build folders and caches",
+      "targets": ["Pods", "build", "DerivedData", "gradle"]
+    }
+  }
+}`}
+    lang="json"
+    filename="~/.npkillrc"
+  />
+
+  <p>
+    Custom profiles will override built-in profiles with the same name. <code
+      >all</code
+    > is reserved.
+  </p>
+
+  <h3 id="custom-rules">Custom rules</h3>
+  <p>Targets take folder names and rules in the same list:</p>
+
+  <CodeBlock
+    code={`"targets": [
+  "_opam",
+  { "target": "_build", "nextTo": ["dune-project"] },
+  { "target": "_build", "nextTo": ["dune-workspace"] }
+]`}
+    lang="json"
+  />
+
+  <ul>
+    <li>
+      A name finds every folder called that way. <code>--targets</code> works the
+      same.
+    </li>
+    <li>
+      A rule needs <code>nextTo</code>, <code>contains</code> or both. Every entry
+      listed must exist.
+    </li>
+    <li>Rules with the same target are alternatives. Any of them is enough.</li>
+    <li>
+      Entries are plain names compared exactly, case included. Paths and the
+      characters <code>* ? [ ] {"{"} {"}"} / \</code> are rejected.
+    </li>
+    <li>Unknown properties are rejected.</li>
+  </ul>
+
+  <h2>Why Profiles Matter</h2>
+  <p>
+    Before npkill 1.0, you had to manually specify targets or run npkill
+    multiple times for different project types. Profiles solve this by grouping
+    related directories together, making it easy to clean up entire development
+    stacks with a single command.
+  </p>
+
+  <div class="tip">
+    <i class="bx bx-bulb"></i>
+    <div>
+      <strong>Pro tip:</strong> Set <code>defaultProfiles</code> in your <code
+        >.npkillrc</code
+      >
+      so npkill always uses your preferred profiles.
+    </div>
+  </div>
+</DocLayout>
+
+<style>
+  .lead {
+    font-size: 1.15rem;
+    color: var(--color-text) !important;
+    margin-bottom: 2rem;
+  }
+
+  .tip {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(241, 77, 77, 0.1);
+    border: 1px solid rgba(241, 77, 77, 0.2);
+    border-radius: 8px;
+    margin: 1.5rem 0;
+  }
+
+  .tip i {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .tip strong {
+    color: var(--color-text);
+  }
+</style>

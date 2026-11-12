@@ -1,39 +1,196 @@
-<div class="root">
-  <div>Npkill</div>
+---
+const currentPath = Astro.url.pathname;
 
-  <div class="spacer"></div>
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/docs/profiles", label: "Profiles" },
+  { href: "/docs/commands", label: "Commands" },
+  { href: "/docs/npkillrc", label: ".npkillrc" },
+  { href: "/community", label: "Community" },
+];
 
-  <div class="links">
-    <a href="#">What is npkill</a>
-    <a href="#">How to use</a>
+function isActive(href: string): boolean {
+  if (href === "/") return currentPath === "/";
+  return currentPath.startsWith(href);
+}
+---
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/" class="logo">
+      <span class="logo-np">np</span><span class="logo-kill">kill</span>
+      <span class="version-badge">1.0</span>
+    </a>
+
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+      <i class="bx bx-menu"></i>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={["nav-link", { active: isActive(link.href) }]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href="https://github.com/voidcosmos/npkill"
+        target="_blank"
+        rel="noopener"
+        class="nav-link github-link"
+      >
+        <i class="bx bxl-github"></i>
+      </a>
+    </div>
   </div>
-</div>
+</nav>
+
+<div class="nav-spacer"></div>
 
 <style>
-  .root {
+  .nav {
     position: fixed;
-    color: white;
-    z-index: 10;
-    width: 100%;
-    padding: 0 52px;
-    box-sizing: border-box;
-    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(10, 10, 11, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+  }
 
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 64px;
     display: flex;
-    display: none;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  .spacer {
-    flex-grow: 1;
-  }
-
-  .links {
+  .logo {
     display: flex;
-    gap: 24px;
-  }
-
-  .links a {
-    color: white;
+    align-items: center;
+    gap: 0rem;
+    font-size: 1.25rem;
+    font-weight: 700;
     text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .logo:hover {
+    color: var(--color-text);
+  }
+
+  .logo-np {
+    color: var(--color-text);
+  }
+
+  .logo-kill {
+    color: var(--color-primary);
+  }
+
+  .version-badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    background: var(--color-primary);
+    color: white;
+    padding: 0.15em 0.5em;
+    border-radius: 4px;
+    margin-left: 0.25rem;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+    background: var(--color-bg-elevated);
+  }
+
+  .nav-link.active {
+    color: var(--color-primary);
+    background: rgba(241, 77, 77, 0.1);
+  }
+
+  .github-link {
+    font-size: 1.25rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .nav-spacer {
+    height: 64px;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-menu-btn {
+      display: block;
+    }
+
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--color-bg-dark);
+      border-bottom: 1px solid var(--color-border);
+      flex-direction: column;
+      padding: 1rem;
+      gap: 0.5rem;
+    }
+
+    .nav-links.open {
+      display: flex;
+    }
+
+    .nav-link {
+      width: 100%;
+      text-align: center;
+      padding: 0.75rem 1rem;
+    }
   }
 </style>
+
+<script>
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const navLinks = document.getElementById("navLinks");
+
+  if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+      const icon = mobileMenuBtn.querySelector("i");
+      if (icon) {
+        icon.classList.toggle("bx-menu");
+        icon.classList.toggle("bx-x");
+      }
+    });
+  }
+</script>

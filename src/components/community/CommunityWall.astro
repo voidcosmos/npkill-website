@@ -30,15 +30,28 @@ const contentToShow = limit
   : randomizedContent;
 ---
 
-<div class="root">
-  {haveLimit ? <h2>The community speaks</h2> : <h2>The Social Wall</h2>}
-  <div class="randomized-notice">(Order randomized every week)</div>
+<section class="community-wall">
+  <div class="wall-header">
+    <span class="section-label">Community</span>
+    {haveLimit ? <h2>The community speaks</h2> : <h2>The Social Wall</h2>}
+    <p class="randomized-notice">Randomized every week</p>
 
-  {
-    !haveLimit && (
-      <div class="pr-notice">Feel free to open a PR to add more content!</div>
-    )
-  }
+    {
+      !haveLimit && (
+        <p class="pr-notice">
+          Feel free to{" "}
+          <a
+            href="https://github.com/voidcosmos/npkill-website"
+            target="_blank"
+            rel="noopener"
+          >
+            open a PR
+          </a>{" "}
+          to add more content!
+        </p>
+      )
+    }
+  </div>
 
   <div class="gallery">
     {
@@ -56,56 +69,94 @@ const contentToShow = limit
 
   {
     haveLimit && (
-      <div style="margin-top: 2em ">
-        <LinkButton link="/community">Show the full community wall</LinkButton>
+      <div class="wall-cta">
+        <LinkButton link="/community" filled={false}>
+          View full community wall
+        </LinkButton>
       </div>
     )
   }
-</div>
+</section>
 
 <style>
-  .root {
-    text-align: center;
-    font-size: 1.4em;
-    background: #13151a;
-    color: white;
-    --grid-opacity: 0.03;
-    --line-width: 0.03em;
-    background-image: linear-gradient(
-        rgba(255, 255, 255, var(--grid-opacity)) var(--line-width),
-        transparent var(--line-width)
-      ),
-      linear-gradient(
-        90deg,
-        rgba(255, 255, 255, var(--grid-opacity)) var(--line-width),
-        transparent var(--line-width)
-      );
-    background-size: 20px 20px;
+  .community-wall {
+    padding: 5rem 1.5rem;
+    background: var(--color-bg-darker);
     position: relative;
-    overflow: hidden;
-    padding-bottom: 2em;
+  }
+
+  .community-wall::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.015) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .wall-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .wall-header h2 {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
   }
 
   .randomized-notice {
-    opacity: 0.4;
-    font-size: 0.6em;
-    margin-top: -40px;
-    margin-bottom: 2em;
+    font-size: 0.85rem;
+    color: var(--color-text-subtle);
+    margin: 0;
   }
 
   .pr-notice {
-    margin-bottom: 2em;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin: 1rem 0 0;
+  }
+
+  .pr-notice a {
+    color: var(--color-primary);
   }
 
   .gallery {
     column-count: 4;
+    column-gap: 1.25rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
 
   .card-container {
-    margin: 32px 12px;
+    break-inside: avoid;
+    margin-bottom: 1.25rem;
   }
-  .card-container:first-child() {
-    margin-top: 0;
+
+  .wall-cta {
+    text-align: center;
+    margin-top: 2.5rem;
+    position: relative;
+    z-index: 1;
   }
 
   @media only screen and (max-width: 1200px) {
@@ -121,6 +172,10 @@ const contentToShow = limit
   }
 
   @media only screen and (max-width: 535px) {
+    .community-wall {
+      padding: 3rem 1rem;
+    }
+
     .gallery {
       column-count: 1;
     }

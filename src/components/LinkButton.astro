@@ -2,31 +2,46 @@
 const { link, filled = true } = Astro.props;
 ---
 
-<a href={link} target="_blank" class:list={["button", { filled }]}>
+<a
+  href={link}
+  target="_blank"
+  rel="noopener"
+  class:list={["button", { filled }]}
+>
   <slot />
 </a>
 
 <style>
   .button {
-    color: black;
-    border: 1px solid gray;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-elevated);
     cursor: pointer;
-    padding: 7px 16px;
-    border-radius: 4px;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
     text-decoration: none;
-    transition: all 0.1s;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+    font-weight: 500;
   }
 
   .button:hover {
-    background-color: #dbdbdb;
+    background: var(--color-bg-card);
+    border-color: var(--color-border-light);
+    color: var(--color-text);
   }
 
   .filled {
     border: none;
-    background-color: #363636;
+    background: var(--color-primary);
     color: white;
   }
+
   .filled:hover {
-    background-color: #1c1c1c;
+    background: var(--color-primary-dark);
+    color: white;
   }
 </style>

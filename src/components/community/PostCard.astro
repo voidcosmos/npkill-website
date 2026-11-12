@@ -13,22 +13,22 @@ const faviconUrl = favicon
   : `https://${new URL(source).hostname}/favicon.ico`;
 ---
 
-<a href={source} target="_blank">
-  <div class="card">
-    <div class="header">
+<a href={source} target="_blank" rel="noopener" class="post-link">
+  <div class="post-card">
+    <div class="post-header">
       <Image
-        class="header-image"
+        class="favicon"
         src={faviconUrl}
-        alt="Image"
-        width="30"
-        height="30"
+        alt="Site favicon"
+        width="32"
+        height="32"
       />
-      <div>
+      <div class="post-meta">
         <div class="post-title">{title}</div>
-        <div>
+        <div class="post-author">
           by {author}
           <span class="date">
-            - {`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}
+            · {`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}
           </span>
         </div>
       </div>
@@ -37,56 +37,58 @@ const faviconUrl = favicon
 </a>
 
 <style>
-  img {
-    max-width: 100%;
-  }
-
-  a {
+  .post-link {
     text-decoration: none;
-    color: white;
+    color: inherit;
+    display: block;
   }
 
-  .card {
-    width: 100%;
-    max-width: 400px;
+  .post-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1rem;
+    transition: border-color 0.2s;
     text-align: left;
-    display: inline-block;
-    border-radius: 8px;
-    box-shadow: 0 0 5px #797979;
-    padding: 7px;
-    box-sizing: border-box;
-    background-color: #13151ab8;
   }
 
-  .header {
+  .post-card:hover {
+    border-color: var(--color-border-light);
+  }
+
+  .post-header {
     display: flex;
-    gap: 12px;
-    font-size: 0.45em;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .favicon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .post-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
   }
 
   .post-title {
-    font-weight: bold;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.3;
+  }
+
+  .post-author {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
   }
 
   .date {
-    font-size: 0.8em;
-    opacity: 0.5;
-  }
-
-  .header-image {
-    width: 30px;
-    height: 30px;
-    border-radius: 100px;
-  }
-
-  .body {
-    font-size: 0.5em;
-    line-height: 1.4;
-    white-space: pre-line;
-  }
-
-  .media {
-    border-radius: 8px;
-    overflow: hidden;
+    color: var(--color-text-subtle);
   }
 </style>
