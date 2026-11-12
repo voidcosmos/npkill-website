@@ -39,7 +39,7 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
   "exclude": ["important-project", "production-app"],
   "sortBy": "size",
   "sizeUnit": "auto",
-  "excludeSensitiveResults": true,
+  "includeSensitiveResults": false,
   "dryRun": false,
   "defaultProfiles": ["node", "webdev"],
   "profiles": {
@@ -92,9 +92,9 @@ import CodeBlock from "../../components/docs/CodeBlock.astro";
           <td>Size display unit: "auto", "mb" or "gb". Default "auto"</td>
         </tr>
         <tr>
-          <td><code>excludeSensitiveResults</code></td>
+          <td><code>includeSensitiveResults</code></td>
           <td>boolean</td>
-          <td>Whether to hide sensitive results. Default false</td>
+          <td>Whether to show sensitive results. Default false</td>
         </tr>
         <tr>
           <td><code>dryRun</code></td>
